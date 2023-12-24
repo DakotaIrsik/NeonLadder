@@ -37,7 +37,7 @@ namespace Platformer.Mechanics
         #endregion
 
         #region Sprinting
-        public float sprintSpeed = 0.8f;
+        public float sprintSpeed = 6f;
         public float sprintDuration = 0.75f; // seconds
         public SprintState sprintState = SprintState.Grounded;
         public bool IsSprinting => sprintState == SprintState.PrepareToSprint || sprintState == SprintState.Sprinting || sprintState == SprintState.MidSprint || !stopSprint;
@@ -252,7 +252,7 @@ namespace Platformer.Mechanics
                 case RollState.Rolled:
                     rollState = RollState.Grounded;
                     stopRoll = false;
-                    maxSpeed = 5f; // Reset to normal speed
+                    maxSpeed = 4f; // Reset to normal speed
 
                     break;
             }
@@ -274,9 +274,10 @@ namespace Platformer.Mechanics
             switch (sprintState)
             {
                 case SprintState.PrepareToSprint:
-                    maxSpeed = sprintSpeed;
-                    sprintDuration = 0.5f; // Reset the sprint duration
+                    maxSpeed = 6f;
                     sprintState = SprintState.Sprinting;
+                    stopSprint = false;
+                    sprintDuration = 0.75f; // Reset the sprint duration
                     break;
 
                 case SprintState.Sprinting:
@@ -284,19 +285,25 @@ namespace Platformer.Mechanics
                     {
                         sprintState = SprintState.Sprinted;
                     }
-                    else if (Mathf.Abs(move.x) > 0) // Check if there's horizontal input
+                    else
                     {
-                        velocity.x = Mathf.Lerp(velocity.x, sprintSpeed * (spriteRenderer.flipX ? -1 : 1), Time.deltaTime * 5f);
+                        // Apply sprint speed in the current movement direction
+                        if (Mathf.Abs(move.x) > 0)
+                        {
+                            velocity.x = Mathf.Sign(move.x) * sprintSpeed;
+                        }
+                        sprintDuration -= Time.deltaTime;
                     }
-                    sprintDuration -= Time.deltaTime;
                     break;
+
                 case SprintState.Sprinted:
                     sprintState = SprintState.Grounded;
-                    stopSprint = false; // Ensure stopSprint is reset
-                    maxSpeed = 5f;
+                    stopSprint = false;
+                    maxSpeed = 4f; // Reset to normal speed
                     break;
             }
         }
+
 
 
         private void HorizontalMovement()
