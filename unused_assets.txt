@@ -1,0 +1,27 @@
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Utils/UIUtils.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Changelog.txt
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Utils/AFPSRenderRecorder.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/CountersData/MemoryCounterData.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/API.txt
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Examples/CodeStage.AFPSCounter.Examples.asmdef
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Label/LabelAnchor.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/AFPSCounter.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/CountersData/FPSCounterData.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Utils/CachedNumbers.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Examples/APITester.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Examples/ExampleScene.unity
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Label/LabelEffect.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Prefabs/Advanced FPS Counter.prefab
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/CountersData/DeviceInfoCounterData.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/CountersData/Abstract/BaseCounterData.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Examples/Prefabs/World Space Example.prefab
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/CountersData/Abstract/UpdatebleCounterData.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Examples/VRExampleScene.unity
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/CountersData/Abstract/StaticCounterData.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Examples/Prefabs/VR Example.prefab
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Label/DrawableLabel.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Enums/OperationMode.cs
+Assets/Plugins/CodeStage/AdvancedFPSCounter/package.json
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/CodeStage.AFPSCounter.Runtime.asmdef
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Readme.pdf
+Assets/Plugins/CodeStage/AdvancedFPSCounter/Runtime/Scripts/Enums/FPSLevel.cs

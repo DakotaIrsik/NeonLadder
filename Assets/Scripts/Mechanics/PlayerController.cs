@@ -14,7 +14,6 @@ namespace Platformer.Mechanics
 {
     public class PlayerController : KinematicObject
     {
-
         public float WallJumpForce = 5.0f;
         public float PercentageOfGravityWhileGrabbing { get; set; } = 0.95f; // example default value, adjust as needed
         public const float DefaultGravity = 9.81f; // example default value, adjust as needed
@@ -137,7 +136,6 @@ namespace Platformer.Mechanics
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
-            Debug.Log("Jump performed");
             if (jumpState == JumpState.Grounded || (grabState == GrabState.Grabbing && FacingCollider != null))
             {
                 jumpState = JumpState.PrepareToJump;
@@ -154,8 +152,6 @@ namespace Platformer.Mechanics
 
         private void OnGrabPerformed(InputAction.CallbackContext context)
         {
-            Debug.Log("Grab performed");
-            // Assuming FacingCollider represents a wall or object that can be grabbed.
             if (FacingCollider != null)
             {
                 grabState = GrabState.Grabbing;
