@@ -1,9 +1,7 @@
 ﻿using Platformer.Gameplay;
 using Platformer.Model;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,18 +13,41 @@ namespace Platformer.Mechanics
     public class PlayerController : KinematicObject
     {
         public float WallJumpForce = 5.0f;
-        public float PercentageOfGravityWhileGrabbing { get; set; } = 0.95f; // example default value, adjust as needed
+        public float maxSpeed = 5f;
+        public float PercentageOfGravityWhileGrabbing = 0.95f; // example default value, adjust as needed
         public const float DefaultGravity = 9.81f; // example default value, adjust as needed
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
-        public float maxSpeed = 7;
-        public float JumpTakeOffSpeed { get; set; } = 7;
-        public JumpState jumpState { get; set; } = JumpState.Grounded;
-        public bool IsJumping => jumpState == JumpState.PrepareToJump || jumpState == JumpState.Jumping || jumpState == JumpState.InFlight;
-        public GrabState grabState = GrabState.Ready;
-        public bool IsGrabbing => grabState == GrabState.Grabbing || grabState == GrabState.Holding;
+
+
+        #region Jumping
+        public float JumpTakeOffSpeed = 7;
+        public JumpState jumpState = JumpState.Grounded;
+
+        public bool IsJumping => jumpState == JumpState.PrepareToJump || jumpState == JumpState.Jumping || jumpState == JumpState.InFlight || !stopJump;
         private bool stopJump;
+        bool jump;
+        #endregion
+
+        #region Grabbing
+        [SerializeField]
+        public GrabState grabState = GrabState.Unable;
+
+        public bool IsGrabbing => grabState == GrabState.Grabbing || grabState == GrabState.Holding || !stopGrab;
+        private bool stopGrab;
+        #endregion
+
+        #region sprinting
+        public float sprintSpeed = .5f;
+        public float sprintDuration = .5f; // seconds
+        public SprintState sprintState = SprintState.Grounded;
+
+        private bool IsSprinting => sprintState == SprintState.PrepareToSprint || sprintState == SprintState.Sprinting || sprintState == SprintState.MidSprint || !stopSprint;
+        private bool stopSprint;
+        #endregion
+
+
         public Collider2D collider2d { get; set; }
         readonly PlatformerModel model = GetModel<PlatformerModel>();
         public Collider2D FacingCollider { get; set; }
@@ -42,8 +63,7 @@ namespace Platformer.Mechanics
             get { return playerControlsAsset; }
             set { playerControlsAsset = value; }
         }
-        bool jump;
-        bool grab;
+
         Vector2 move;
         public SpriteRenderer spriteRenderer { get; set; }
         internal Animator animator;
@@ -86,30 +106,31 @@ namespace Platformer.Mechanics
 
             var jumpAction = playerActionMap.FindAction("Jump");
             jumpAction.performed += OnJumpPerformed;
-            jumpAction.canceled += OnJumpCanceled;
 
-            PrintUnusedAssets();
+            var sprintAction = playerActionMap.FindAction("Sprint");
+            sprintAction.performed += OnSprintPerformed;
+            sprintAction.canceled += OnSprintCanceled;
         }
 
-        private void PrintUnusedAssets()
+        private void OnSprintPerformed(InputAction.CallbackContext context)
         {
-            string[] allAssets = AssetDatabase.GetAllAssetPaths();
-            HashSet<string> usedAssets = new HashSet<string>();
-            var sb = new StringBuilder();
-            foreach (string asset in allAssets)
+            if (sprintState == SprintState.Grounded)
             {
-                if (!usedAssets.Contains(asset) && !asset.Contains("Package") && !Directory.Exists(asset) && !asset.Contains("Manager") && !asset.Contains("Platformer")
-                && !asset.Contains("Scripts/Mechanics") && !asset.Contains("Tiles") && !asset.Contains("Billboards")
-                && !asset.Contains("Scripts/Gameplay") && !asset.Contains("Settings") && !asset.Contains("TextMesh Pro") && !asset.Contains("Assets/Prefabs") && !asset.Contains("Icons")
-                && !asset.Contains("Environment/Sprites") && !asset.Contains("Character/") && !asset.Contains("Audio") && !asset.Contains("Scripts/View") && !asset.Contains("Rendering")
-                && !asset.Contains("Input") && !asset.Contains("Scenes/") && !asset.Contains("Fonts/") && !asset.Contains("UI/") && !asset.Contains("Editor/") && !asset.Contains("Scripts/Core")
-                && !asset.Contains("HUD") && !asset.Contains("Controlers/") && !asset.Contains("Library/") && !asset.Contains("Controls"))
-                {
-                    sb.Append(asset + "\r\n");
-                }
+                sprintState = SprintState.PrepareToSprint;
+                stopSprint = false;
+                // Additional logic for starting the sprint, such as playing an animation
             }
-            File.WriteAllText(@".\unused_assets.txt", sb.ToString());
         }
+
+        private void OnSprintCanceled(InputAction.CallbackContext context)
+        {
+            if (IsSprinting)
+            {
+                stopSprint = true;
+            }
+        }
+
+
 
         private string FormatDeviceName(string deviceName)
         {
@@ -117,9 +138,9 @@ namespace Platformer.Mechanics
             {
                 case "Keyboard":
                     return "Keyboard";
-                case "XInputController":
+                case "XInputContsprinter":
                     return "Xbox"; // maybe also steam?
-                case "SwitchProControllerHID":
+                case "SwitchProContsprinterHID":
                     return "Nintendo Switch";
                 case "DualShockGamepad":// Add more cases as needed for other devices
                     return "Playstation";
@@ -128,11 +149,6 @@ namespace Platformer.Mechanics
             }
         }
 
-
-        private void OnJumpCanceled(InputAction.CallbackContext context)
-        {
-            //anything fancy?
-        }
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
@@ -173,6 +189,7 @@ namespace Platformer.Mechanics
             HandleInput();
             UpdateJumpState();
             UpdateGrabState();
+            UpdateSprintState();
             base.Update();
         }
 
@@ -185,6 +202,46 @@ namespace Platformer.Mechanics
                 HandleWallGrab();
             }
         }
+
+        private void UpdateSprintState()
+        {
+            switch (sprintState)
+            {
+                case SprintState.PrepareToSprint:
+                    maxSpeed = 10f;
+                    sprintDuration = 0.5f; // Reset the sprint duration
+                    sprintState = SprintState.Sprinting;
+                    break;
+
+                case SprintState.Sprinting:
+                    if (stopSprint || sprintDuration <= 0)
+                    {
+                        sprintState = SprintState.Sprinted;
+                    }
+                    else
+                    {
+                        velocity.x = Mathf.Lerp(velocity.x, sprintSpeed * (spriteRenderer.flipX ? -1 : 1), Time.deltaTime * 5f);
+                        sprintDuration -= Time.deltaTime;
+                    }
+                    break;
+
+                case SprintState.Sprinted:
+                    sprintState = SprintState.Grounded;
+                    stopSprint = false; // Ensure stopSprint is reset
+                    maxSpeed = 5f;
+                    break;
+            }
+        }
+
+
+
+        private void PlayMovementAnimation()
+        {
+            // Adjust this to play your movement animation
+            // For example, setting the speed of the animation to be faster
+            animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+        }
+
 
         private void HorizontalMovement()
         {
@@ -260,14 +317,13 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
-            if (grabState == GrabState.Holding)
+            if (sprintState == SprintState.Sprinting)
             {
-                // Example: Stop vertical movement
-                velocity.y = 0;
+                //help gpt
             }
             else
             {
-
+                // Normal movement logic here
                 if (jump && IsGrounded)
                 {
                     velocity.y = JumpTakeOffSpeed * model.jumpModifier;
@@ -282,7 +338,6 @@ namespace Platformer.Mechanics
                     }
                 }
 
-
                 if (move.x > 0.01f)
                 {
                     spriteRenderer.flipX = false;
@@ -296,16 +351,13 @@ namespace Platformer.Mechanics
                 {
                     ApplyGravity(PercentageOfGravityWhileGrabbing);
                 }
-                else
-                {
-                    // Apply normal gravity
-                    ApplyGravity();
-                }
-                GroundedAnimation();
-
-                move.x = Mathf.Clamp(move.x, -maxSpeed, maxSpeed);
-                ResetVelocity();
             }
+
+
+            ApplyGravity();
+            GroundedAnimation();
+            move.x = Mathf.Clamp(move.x, -maxSpeed, maxSpeed);
+            ResetVelocity();
         }
 
         public void ApplyGravity(float gravity = DefaultGravity)

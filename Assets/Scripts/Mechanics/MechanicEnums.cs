@@ -11,6 +11,24 @@
             Landed
         }
 
+        public enum SprintState
+        {
+            Grounded,
+            PrepareToSprint,
+            Sprinting,
+            MidSprint,
+            Sprinted
+        }
+
+        public enum RollState
+        {
+            Ready,
+            PrepareToRoll,
+            Rolling,
+            MidRoll,
+            Rolled
+        }
+
         public enum PickupState
         {
             Ready,

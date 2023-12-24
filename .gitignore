@@ -82,3 +82,4 @@ crashlytics-build.properties
 /Releases
 /Assets/Mod Assets/*
 *Mod Assets*
+/Assets/XR
