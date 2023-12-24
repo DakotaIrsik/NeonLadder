@@ -13,7 +13,7 @@ namespace Platformer.Mechanics
     public class PlayerController : KinematicObject
     {
         public float WallJumpForce = 5.0f;
-        public float maxSpeed = 5f;
+        public float maxSpeed = 4f;
         public float PercentageOfGravityWhileGrabbing = 0.95f; // example default value, adjust as needed
         public const float DefaultGravity = 9.81f; // example default value, adjust as needed
         public AudioClip jumpAudio;
@@ -24,7 +24,6 @@ namespace Platformer.Mechanics
         #region Jumping
         public float JumpTakeOffSpeed = 7;
         public JumpState jumpState = JumpState.Grounded;
-
         public bool IsJumping => jumpState == JumpState.PrepareToJump || jumpState == JumpState.Jumping || jumpState == JumpState.InFlight || !stopJump;
         private bool stopJump;
         bool jump;
@@ -33,24 +32,31 @@ namespace Platformer.Mechanics
         #region Grabbing
         [SerializeField]
         public GrabState grabState = GrabState.Unable;
-
         public bool IsGrabbing => grabState == GrabState.Grabbing || grabState == GrabState.Holding || !stopGrab;
         private bool stopGrab;
         #endregion
 
-        #region sprinting
-        public float sprintSpeed = .5f;
-        public float sprintDuration = .5f; // seconds
+        #region Sprinting
+        public float sprintSpeed = 0.8f;
+        public float sprintDuration = 0.75f; // seconds
         public SprintState sprintState = SprintState.Grounded;
-
-        private bool IsSprinting => sprintState == SprintState.PrepareToSprint || sprintState == SprintState.Sprinting || sprintState == SprintState.MidSprint || !stopSprint;
+        public bool IsSprinting => sprintState == SprintState.PrepareToSprint || sprintState == SprintState.Sprinting || sprintState == SprintState.MidSprint || !stopSprint;
         private bool stopSprint;
+        #endregion
+
+        #region Rolling
+        public float rollSpeed = .8f;
+        public float rollDuration = 0.25f; // seconds
+        public bool IsRollCancellable = true;
+        public RollState rollState = RollState.Grounded;
+        public bool IsRolling => rollState == RollState.PrepareToRoll || rollState == RollState.Rolling || rollState == RollState.MidRoll || !stopRoll;
+        private bool stopRoll;
         #endregion
 
 
         public Collider2D collider2d { get; set; }
         readonly PlatformerModel model = GetModel<PlatformerModel>();
-        public Collider2D FacingCollider { get; set; }
+        public Collider2D FacingCollider { get; set; } //test
         public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
@@ -110,7 +116,31 @@ namespace Platformer.Mechanics
             var sprintAction = playerActionMap.FindAction("Sprint");
             sprintAction.performed += OnSprintPerformed;
             sprintAction.canceled += OnSprintCanceled;
+
+            var rollAction = playerActionMap.FindAction("Roll");
+            rollAction.performed += OnRollPerformed;
+            rollAction.canceled += OnRollCanceled;
         }
+
+        private void OnRollPerformed(InputAction.CallbackContext context)
+        {
+            if (rollState == RollState.Grounded)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Rolling Layer");
+                rollState = RollState.PrepareToRoll;
+                stopRoll = false;
+            }
+        }
+
+        private void OnRollCanceled(InputAction.CallbackContext context)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Default");
+            if (IsRolling)
+            {
+                stopRoll = true;
+            }
+        }
+
 
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
@@ -190,8 +220,44 @@ namespace Platformer.Mechanics
             UpdateJumpState();
             UpdateGrabState();
             UpdateSprintState();
+            UpdateRollState();
             base.Update();
         }
+
+
+        private void UpdateRollState()
+        {
+            switch (rollState)
+            {
+                case RollState.PrepareToRoll:
+                    rollState = RollState.Rolling;
+                    stopRoll = false;
+                    maxSpeed = 10f;
+                    rollDuration = 0.25f; 
+                    break;
+
+                case RollState.Rolling:
+                    if ((IsRollCancellable && stopRoll) || rollDuration <= 0)
+                    {
+                        rollState = RollState.Rolled;
+                    }
+                    else
+                    {
+                        // Update position here for autorun
+                        move.x = rollSpeed * (spriteRenderer.flipX ? -1 : 1);
+                        rollDuration -= Time.deltaTime;
+                    }
+                    break;
+
+                case RollState.Rolled:
+                    rollState = RollState.Grounded;
+                    stopRoll = false;
+                    maxSpeed = 5f; // Reset to normal speed
+
+                    break;
+            }
+        }
+
 
         private void HandleInput()
         {
@@ -208,7 +274,7 @@ namespace Platformer.Mechanics
             switch (sprintState)
             {
                 case SprintState.PrepareToSprint:
-                    maxSpeed = 10f;
+                    maxSpeed = sprintSpeed;
                     sprintDuration = 0.5f; // Reset the sprint duration
                     sprintState = SprintState.Sprinting;
                     break;
@@ -218,28 +284,18 @@ namespace Platformer.Mechanics
                     {
                         sprintState = SprintState.Sprinted;
                     }
-                    else
+                    else if (Mathf.Abs(move.x) > 0) // Check if there's horizontal input
                     {
                         velocity.x = Mathf.Lerp(velocity.x, sprintSpeed * (spriteRenderer.flipX ? -1 : 1), Time.deltaTime * 5f);
-                        sprintDuration -= Time.deltaTime;
                     }
+                    sprintDuration -= Time.deltaTime;
                     break;
-
                 case SprintState.Sprinted:
                     sprintState = SprintState.Grounded;
                     stopSprint = false; // Ensure stopSprint is reset
                     maxSpeed = 5f;
                     break;
             }
-        }
-
-
-
-        private void PlayMovementAnimation()
-        {
-            // Adjust this to play your movement animation
-            // For example, setting the speed of the animation to be faster
-            animator.SetFloat("Speed", Mathf.Abs(velocity.x));
         }
 
 

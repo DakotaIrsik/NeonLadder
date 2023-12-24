@@ -13,7 +13,7 @@ public class JumpSpeedPowerUpManager : BasePowerUpManager
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && other.gameObject.name != "Enemy")
         {
 
             Buff newBuff;

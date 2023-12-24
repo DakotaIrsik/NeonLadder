@@ -50,8 +50,10 @@ public class DiagnosticsManager : MonoBehaviour
     void ShowDebugInfo()
     {
         string debugInfo = "Player position: " + transform.position.ToString() + "\n";
-        debugInfo += "IsGrabbing: " + (Player.IsGrabbing ? "Yes" : "No") + "\n";
-        debugInfo += "IsJumping: " + (Player.IsJumping ? "Yes" : "No") + "\n";
+        debugInfo += "GrabState: " + Player.grabState + "\n";
+        debugInfo += "JumpState: " + Player.IsJumping  + "\n";
+        debugInfo += "SprintState: " + Player.sprintState + "\n";
+        debugInfo += "RollState: " + Player.rollState + "\n";
         string hitInfo = "Object in collision: " + ((Player.FacingCollider == null) ? "None" : Player.FacingCollider.gameObject.name);
         debugInfo += hitInfo + "\n";
         UpdateDebugMessage(debugInfo);

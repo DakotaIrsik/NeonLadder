@@ -22,7 +22,7 @@
 
         public enum RollState
         {
-            Ready,
+            Grounded,
             PrepareToRoll,
             Rolling,
             MidRoll,
