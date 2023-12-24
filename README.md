@@ -14,12 +14,6 @@ Launch Executable
 
 
 ## Controls
-## Xbox controller supported fully on build_windows_for_windows.bat and webgl
-
-### KNOWN bug with PS5 controller on windows build.
-### KNOWN bug with PS5/Swith Pro controllers working on webgl.
-https://hardwaretester.com/gamepad
-
 ### KeyBoard:
 - Arrow keys or WASD to Move
 - Space bar to Jump
@@ -33,3 +27,9 @@ https://hardwaretester.com/gamepad
  - Right Trigger to Grab (onto some walls)
  - Left face button to sprint
  - Left Bumper to Roll / Dash
+
+## Xbox controller supported fully on build_windows_for_windows.bat and webgl
+### KNOWN bug with PS5 controller on windows build.
+### KNOWN bug with PS5/Swith Pro controllers working on webgl.
+https://hardwaretester.com/gamepad
+
