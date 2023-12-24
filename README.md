@@ -19,3 +19,17 @@ Launch Executable
 ### KNOWN bug with PS5 controller on windows build.
 ### KNOWN bug with PS5/Swith Pro controllers working on webgl.
 https://hardwaretester.com/gamepad
+
+### KeyBoard:
+- Arrow keys or WASD to Move
+- Space bar to Jump
+- F to wall-hang (allows for double jumping
+- Shift to Sprint
+- Left Ctrl to roll / dash.
+
+### Gampad:
+ - Left Joystick for movement
+ - Bottom face button to jump
+ - Right Trigger to Grab (onto some walls)
+ - Left face button to sprint
+ - Left Bumper to Roll / Dash
