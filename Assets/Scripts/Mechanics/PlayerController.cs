@@ -308,8 +308,6 @@ namespace Platformer.Mechanics
             }
         }
 
-
-
         private void HorizontalMovement()
         {
             move.x = Input.GetAxis("Horizontal");
@@ -323,7 +321,6 @@ namespace Platformer.Mechanics
                 Schedule<PlayerStopJump>().player = this;
             }
         }
-
 
         private void UpdateGrabState()
         {
@@ -420,7 +417,6 @@ namespace Platformer.Mechanics
                 }
             }
 
-
             ResetMovement();
         }
 
@@ -431,7 +427,6 @@ namespace Platformer.Mechanics
                 velocity.y += -gravity * Time.deltaTime;
             }
         }
-
 
         private void ResetVelocity()
         {
