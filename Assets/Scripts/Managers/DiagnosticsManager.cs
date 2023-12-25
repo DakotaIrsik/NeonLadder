@@ -30,10 +30,6 @@ public class DiagnosticsManager : MonoBehaviour
         lineRenderer.gameObject.SetActive(isVisible); // Enable or disable LineRenderer
     }
 
-    void Update()
-    {
-        ShowDebugInfo();
-    }
 
     public void UpdateDebugMessage(string message)
     {
@@ -45,17 +41,5 @@ public class DiagnosticsManager : MonoBehaviour
         {
             Debug.LogWarning("DebugText not set on " + gameObject.name);
         }
-    }
-
-    void ShowDebugInfo()
-    {
-        string debugInfo = "Player position: " + transform.position.ToString() + "\n";
-        debugInfo += "GrabState: " + Player.grabState + "\n";
-        debugInfo += "JumpState: " + Player.IsJumping  + "\n";
-        debugInfo += "SprintState: " + Player.sprintState + "\n";
-        debugInfo += "RollState: " + Player.rollState + "\n";
-        string hitInfo = "Object in collision: " + ((Player.FacingCollider == null) ? "None" : Player.FacingCollider.gameObject.name);
-        debugInfo += hitInfo + "\n";
-        UpdateDebugMessage(debugInfo);
     }
 }

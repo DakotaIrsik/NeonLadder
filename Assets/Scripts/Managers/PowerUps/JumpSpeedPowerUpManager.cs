@@ -1,14 +1,13 @@
+using Assets.Scripts;
 using UnityEngine;
 using static Assets.Scripts.Mechanics.MechanicEnums;
 
 public class JumpSpeedPowerUpManager : BasePowerUpManager
 {
-    private float OriginalJumpTakeOffSpeed;
 
     protected override void Start()
     {
         base.Start();
-        OriginalJumpTakeOffSpeed = Player.JumpTakeOffSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,16 +38,16 @@ public class JumpSpeedPowerUpManager : BasePowerUpManager
     }
     protected override void ApplyPermanentBuffEffect(Buff buff)
     {
-        Player.JumpTakeOffSpeed += buff.Magnitude * OriginalJumpTakeOffSpeed;
+        Constants.JumpTakeOffSpeed += buff.Magnitude * Constants.DefaultJumpTakeOffSpeed;
     }
 
     protected override void ApplyTemporaryBuffEffect(Buff buff)
     {
-        Player.JumpTakeOffSpeed += buff.Magnitude * OriginalJumpTakeOffSpeed;
+        Constants.JumpTakeOffSpeed += buff.Magnitude * Constants.DefaultJumpTakeOffSpeed;
     }
 
     protected override void RemoveBuffEffect(Buff buff)
     {
-        Player.JumpTakeOffSpeed = OriginalJumpTakeOffSpeed;
+        Constants.JumpTakeOffSpeed = Constants.DefaultJumpTakeOffSpeed;
     }
 }

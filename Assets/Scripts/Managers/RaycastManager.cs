@@ -20,7 +20,6 @@ public class RaycastManager : MonoBehaviour
     private void Update()
     {
         var WallHit = GetRaycastInfo();
-        UpdateLineRenderer(WallHit.Item1, WallHit.Item2, RayLength);
     }
 
     public (Vector2 rayStart, Vector2 rayDirection) GetRaycastInfo()
@@ -30,29 +29,6 @@ public class RaycastManager : MonoBehaviour
         return (rayStart, rayDirection);
     }
 
-    private Color GetRaycastColor()
-    {
-        switch (Player.grabState)
-        {
-            case GrabState.Grabbing:
-            case GrabState.Holding:
-                return Color.green;
-            case GrabState.Ready:
-                return Color.blue;
-            case GrabState.Unable:
-                return Color.red;
-            default:
-                return Color.yellow;
-        }
-    }
-
-    private void UpdateLineRenderer(Vector2 start, Vector2 direction, float length)
-    {
-        Vector2 end = start + direction * length;
-        LineRenderer.SetPositions(new Vector3[] { start, end });
-        Color rayColor = GetRaycastColor();
-        LineRenderer.startColor = LineRenderer.endColor = rayColor;
-    }
 
     private void OnEnable()
     {

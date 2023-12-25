@@ -28,8 +28,8 @@ public abstract class BasePowerUpManager : MonoBehaviour
     public TextMesh Mesh { get; set; }
 
     [SerializeField]
-    [Range(0.1f, 5.0f)]
-    protected float Magnitude = 1.0f;
+    [Range(0.1f, 0.5f)]
+    protected float Magnitude = 0.25f;
 
     protected virtual void Start()
     {

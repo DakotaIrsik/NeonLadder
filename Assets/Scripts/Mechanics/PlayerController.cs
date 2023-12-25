@@ -1,4 +1,5 @@
-﻿using Platformer.Gameplay;
+﻿using Assets.Scripts;
+using Platformer.Gameplay;
 using Platformer.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,45 +13,14 @@ namespace Platformer.Mechanics
 {
     public class PlayerController : KinematicObject
     {
-        public float WallJumpForce = 5.0f;
-        public float maxSpeed = 4f;
-        public float PercentageOfGravityWhileGrabbing = 0.95f; // example default value, adjust as needed
-        public const float DefaultGravity = 9.81f; // example default value, adjust as needed
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
-
-        #region Jumping
-        public float JumpTakeOffSpeed = 7;
-        public JumpState jumpState = JumpState.Grounded;
-        public bool IsJumping => jumpState == JumpState.PrepareToJump || jumpState == JumpState.Jumping || jumpState == JumpState.InFlight || !stopJump;
-        private bool stopJump;
-        bool jump;
-        #endregion
-
-        #region Grabbing
         [SerializeField]
-        public GrabState grabState = GrabState.Unable;
-        public bool IsGrabbing => grabState == GrabState.Grabbing || grabState == GrabState.Holding || !stopGrab;
-        private bool stopGrab;
-        #endregion
+        public PlayerActionController playerActions;
+        public bool IsFacingLeft => spriteRenderer.flipX;
+        public bool IsFacingRight => !IsFacingLeft;
 
-        #region Sprinting
-        public float sprintSpeed = 6f;
-        public float sprintDuration = 0.75f; // seconds
-        public SprintState sprintState = SprintState.Grounded;
-        public bool IsSprinting => sprintState == SprintState.PrepareToSprint || sprintState == SprintState.Sprinting || sprintState == SprintState.MidSprint || !stopSprint;
-        private bool stopSprint;
-        #endregion
-
-        #region Rolling
-        public float rollSpeed = .8f;
-        public float rollDuration = 0.25f; // seconds
-        public bool IsRollCancellable = true;
-        public RollState rollState = RollState.Grounded;
-        public bool IsRolling => rollState == RollState.PrepareToRoll || rollState == RollState.Rolling || rollState == RollState.MidRoll || !stopRoll;
-        private bool stopRoll;
-        #endregion
 
 
         public Collider2D collider2d { get; set; }
@@ -123,20 +93,20 @@ namespace Platformer.Mechanics
 
         private void OnRollPerformed(InputAction.CallbackContext context)
         {
-            if (rollState == RollState.Grounded)
+            if (playerActions.rollState == ActionState.Ready)
             {
                 gameObject.layer = LayerMask.NameToLayer("Rolling Layer");
-                rollState = RollState.PrepareToRoll;
-                stopRoll = false;
+                playerActions.rollState = ActionState.Preparing;
+                playerActions.stopRoll = false;
             }
         }
 
         private void OnRollCanceled(InputAction.CallbackContext context)
         {
             gameObject.layer = LayerMask.NameToLayer("Default");
-            if (IsRolling)
+            if (playerActions.IsRolling)
             {
-                stopRoll = true;
+                playerActions.stopRoll = true;
             }
         }
 
@@ -144,26 +114,26 @@ namespace Platformer.Mechanics
         {
             ApplyGravity();
             GroundedAnimation();
-            move.x = Mathf.Clamp(move.x, -maxSpeed, maxSpeed);
+            move.x = Mathf.Clamp(move.x, -Constants.MaxSpeed, Constants.MaxSpeed);
             ResetVelocity();
         }
 
 
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
-            if (sprintState == SprintState.Grounded)
+            if (playerActions.sprintState == ActionState.Ready)
             {
-                sprintState = SprintState.PrepareToSprint;
-                stopSprint = false;
+                playerActions.sprintState = ActionState.Preparing;
+                playerActions.stopSprint = false;
                 // Additional logic for starting the sprint, such as playing an animation
             }
         }
 
         private void OnSprintCanceled(InputAction.CallbackContext context)
         {
-            if (IsSprinting)
+            if (playerActions.IsSprinting)
             {
-                stopSprint = true;
+                playerActions.stopSprint = true;
             }
         }
 
@@ -186,16 +156,16 @@ namespace Platformer.Mechanics
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
-            if (jumpState == JumpState.Grounded || (grabState == GrabState.Grabbing && FacingCollider != null))
+            if (playerActions.jumpState == ActionState.Ready || (playerActions.grabState == ActionState.Acting && FacingCollider != null))
             {
-                jumpState = JumpState.PrepareToJump;
+                playerActions.jumpState = ActionState.Preparing;
 
-                if (grabState == GrabState.Grabbing)
+                if (playerActions.grabState == ActionState.Acting)
                 {
-                    velocity.x = WallJumpForce * (spriteRenderer.flipX ? 1 : -1);
-                    grabState = GrabState.Unable;
+                    velocity.x = Constants.WallJumpForce * (spriteRenderer.flipX ? 1 : -1);
+                    playerActions.grabState = ActionState.Ready;
                 }
-                velocity.y = JumpTakeOffSpeed * model.jumpModifier;
+                velocity.y = Constants.JumpTakeOffSpeed * model.jumpModifier;
             }
         }
 
@@ -204,107 +174,37 @@ namespace Platformer.Mechanics
         {
             if (FacingCollider != null)
             {
-                grabState = GrabState.Grabbing;
-                velocity = -DefaultGravity * PercentageOfGravityWhileGrabbing * Time.deltaTime * -Vector2.up;
+                playerActions.grabState = ActionState.Acting;
+                velocity = -Constants.DefaultGravity * Constants.PercentageOfGravityWhileGrabbing * Time.deltaTime * -Vector2.up;
 
             }
         }
 
         private void OnGrabCanceled(InputAction.CallbackContext context)
         {
-            if (grabState == GrabState.Grabbing || grabState == GrabState.Holding)
+            if (playerActions.grabState == ActionState.Acting || playerActions.grabState == ActionState.InAction)
             {
-                grabState = GrabState.Unable;
+                playerActions.grabState = ActionState.Ready;
             }
         }
 
         protected override void Update()
         {
             HandleInput();
-            UpdateJumpState();
-            UpdateGrabState();
-            UpdateSprintState();
-            UpdateRollState();
+            playerActions.UpdateJumpState(IsGrounded);
+            playerActions.UpdateGrabState(velocity);
+            playerActions.UpdateSprintState(move, velocity);
+            playerActions.UpdateRollState(move, spriteRenderer);
             base.Update();
         }
-
-
-        private void UpdateRollState()
-        {
-            switch (rollState)
-            {
-                case RollState.PrepareToRoll:
-                    rollState = RollState.Rolling;
-                    stopRoll = false;
-                    maxSpeed = 10f;
-                    rollDuration = 0.25f; 
-                    break;
-
-                case RollState.Rolling:
-                    if ((IsRollCancellable && stopRoll) || rollDuration <= 0)
-                    {
-                        rollState = RollState.Rolled;
-                    }
-                    else
-                    {
-                        // Update position here for autorun
-                        move.x = rollSpeed * (spriteRenderer.flipX ? -1 : 1);
-                        rollDuration -= Time.deltaTime;
-                    }
-                    break;
-
-                case RollState.Rolled:
-                    rollState = RollState.Grounded;
-                    stopRoll = false;
-                    maxSpeed = 4f; // Reset to normal speed
-
-                    break;
-            }
-        }
-
 
         private void HandleInput()
         {
             if (controlEnabled)
             {
                 HorizontalMovement();
-                HandleJump();
-                HandleWallGrab();
-            }
-        }
-
-        private void UpdateSprintState()
-        {
-            switch (sprintState)
-            {
-                case SprintState.PrepareToSprint:
-                    maxSpeed = 6f;
-                    sprintState = SprintState.Sprinting;
-                    stopSprint = false;
-                    sprintDuration = 0.75f; // Reset the sprint duration
-                    break;
-
-                case SprintState.Sprinting:
-                    if (stopSprint || sprintDuration <= 0)
-                    {
-                        sprintState = SprintState.Sprinted;
-                    }
-                    else
-                    {
-                        // Apply sprint speed in the current movement direction
-                        if (Mathf.Abs(move.x) > 0)
-                        {
-                            velocity.x = Mathf.Sign(move.x) * sprintSpeed;
-                        }
-                        sprintDuration -= Time.deltaTime;
-                    }
-                    break;
-
-                case SprintState.Sprinted:
-                    sprintState = SprintState.Grounded;
-                    stopSprint = false;
-                    maxSpeed = 4f; // Reset to normal speed
-                    break;
+                playerActions.HandleJump();
+                playerActions.HandleWallGrab(velocity);
             }
         }
 
@@ -313,89 +213,23 @@ namespace Platformer.Mechanics
             move.x = Input.GetAxis("Horizontal");
         }
 
-        private void HandleJump()
-        {
-            if (Input.GetButtonUp("Jump"))
-            {
-                stopJump = true;
-                Schedule<PlayerStopJump>().player = this;
-            }
-        }
-
-        private void UpdateGrabState()
-        {
-            if (grabState == GrabState.Grabbing)
-            {
-                if (velocity.y < 0)
-                {
-                    jumpState = JumpState.Grounded;
-                }
-            }
-        }
-
-        private void HandleWallGrab()
-        {
-            if (grabState == GrabState.Grabbing)
-            {
-                if (Mathf.Abs(velocity.y) > 0.1f)
-                {
-                    velocity.y *= PercentageOfGravityWhileGrabbing;
-                }
-                else
-                {
-                    velocity.y = 0;
-                }
-            }
-        }
-
-        void UpdateJumpState()
-        {
-
-            jump = false;
-            switch (jumpState)
-            {
-                case JumpState.PrepareToJump:
-                    jumpState = JumpState.Jumping;
-                    jump = true;
-                    stopJump = false;
-                    break;
-                case JumpState.Jumping:
-                    if (!IsGrounded)
-                    {
-                        Schedule<PlayerJumped>().player = this;
-                        jumpState = JumpState.InFlight;
-                    }
-                    break;
-                case JumpState.InFlight:
-                    if (IsGrounded)
-                    {
-                        Schedule<PlayerLanded>().player = this;
-                        jumpState = JumpState.Landed;
-                    }
-                    break;
-                case JumpState.Landed:
-                    jumpState = JumpState.Grounded;
-                    break;
-            }
-        }
-
         protected override void ComputeVelocity()
         {
-            if (sprintState == SprintState.Sprinting)
+            if (playerActions.sprintState == ActionState.Acting)
             {
                 //help gpt
             }
             else
             {
                 // Normal movement logic here
-                if (jump && IsGrounded)
+                if (playerActions.jump && IsGrounded)
                 {
-                    velocity.y = JumpTakeOffSpeed * model.jumpModifier;
-                    jump = false;
+                    velocity.y = Constants.JumpTakeOffSpeed * model.jumpModifier;
+                    playerActions.jump = false;
                 }
-                else if (stopJump)
+                else if (playerActions.stopJump)
                 {
-                    stopJump = false;
+                    playerActions.stopJump = false;
                     if (velocity.y > 0)
                     {
                         velocity.y = velocity.y * model.jumpDeceleration;
@@ -411,16 +245,16 @@ namespace Platformer.Mechanics
                     spriteRenderer.flipX = true;
                 }
 
-                if (grabState == GrabState.Grabbing)
+                if (playerActions.grabState == ActionState.Acting)
                 {
-                    ApplyGravity(PercentageOfGravityWhileGrabbing);
+                    ApplyGravity(Constants.PercentageOfGravityWhileGrabbing);
                 }
             }
 
             ResetMovement();
         }
 
-        public void ApplyGravity(float gravity = DefaultGravity)
+        public void ApplyGravity(float gravity = Constants.DefaultGravity)
         {
             if (!IsGrounded)
             {
@@ -430,13 +264,13 @@ namespace Platformer.Mechanics
 
         private void ResetVelocity()
         {
-            targetVelocity = move * maxSpeed;
+            targetVelocity = move * Constants.MaxSpeed;
         }
 
         private void GroundedAnimation()
         {
             animator.SetBool("grounded", IsGrounded);
-            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / Constants.MaxSpeed);
         }
     }
 }

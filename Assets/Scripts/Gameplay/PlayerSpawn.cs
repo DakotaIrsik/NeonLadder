@@ -20,7 +20,7 @@ namespace Platformer.Gameplay
                 player.audioSource.PlayOneShot(player.respawnAudio);
             player.health.Increment();
             player.Teleport(model.spawnPoint.transform.position);
-            player.jumpState = Assets.Scripts.Mechanics.MechanicEnums.JumpState.Grounded;
+            player.playerActions.jumpState = Assets.Scripts.Mechanics.MechanicEnums.ActionState.Ready;
             player.animator.SetBool("dead", false);
             model.virtualCamera.m_Follow = player.transform;
             model.virtualCamera.m_LookAt = player.transform;
