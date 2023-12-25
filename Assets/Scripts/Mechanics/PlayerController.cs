@@ -50,21 +50,28 @@ namespace Platformer.Mechanics
         {
             if (collision.collider.name == "Level")
             {
-                return;
+                if (playerActions.slideState == ActionState.Acting)
+                {
+                    playerActions.stopSlide = true;
+                }
             }
             else if (collision.collider.name == "Wall")
             {
                 FacingCollider = collision.collider;
+                if (playerActions.slideState == ActionState.Acting)
+                {
+                    playerActions.stopSlide = true;
+                }   
             }
             else if (collision.collider.name == "Enemy" && playerActions.slideState == ActionState.Acting)
             {
                 CapsuleCollider2D enemyCollider = collision.collider.GetComponent<CapsuleCollider2D>();
                 enemyCollider.isTrigger = true;
-                StartCoroutine(ResetColliderAfterRoll(enemyCollider));
+                StartCoroutine(ResetColliderAfterSlide(enemyCollider));
             }
         }
 
-        IEnumerator ResetColliderAfterRoll(CapsuleCollider2D collider)
+        IEnumerator ResetColliderAfterSlide(CapsuleCollider2D collider)
         {
             yield return new WaitForSeconds(Constants.SlideDuration);
             collider.isTrigger = false;

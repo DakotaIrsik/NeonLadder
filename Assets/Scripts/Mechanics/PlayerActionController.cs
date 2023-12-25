@@ -78,11 +78,16 @@ namespace Platformer.Mechanics
                     {
                         float slideDirection = sprite.flipX ? -1 : 1;
                         /*
-                        animation for the non-cancellable slide
+                        animation for the non-cancellable slide */
                         move.x = (sprite.flipX ? -1 : 1) * slideSpeed;
                         player.velocity.x = move.x;
-                        */
+                        
                         player.transform.Translate(slideDirection * slideSpeed * Time.deltaTime, 0, 0);
+
+                        //var playerInput = player.controls.FindActionMap("Player").FindAction("Move").ReadValue<Vector2>();
+                        //Vector3 slideDirection = new Vector3(playerInput.x, 0, playerInput.y).normalized;
+                        //Rigidbody playerRigidbody = player.GetComponent<Rigidbody>();
+                        //playerRigidbody.velocity = slideDirection * slideSpeed;
                         slideDuration -= Time.deltaTime;
                     }
                     break;
