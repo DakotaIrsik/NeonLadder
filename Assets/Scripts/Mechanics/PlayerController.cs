@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts;
-using Platformer.Gameplay;
 using Platformer.Model;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -20,9 +20,6 @@ namespace Platformer.Mechanics
         public PlayerActionController playerActions;
         public bool IsFacingLeft => spriteRenderer.flipX;
         public bool IsFacingRight => !IsFacingLeft;
-
-
-
         public Collider2D collider2d { get; set; }
         readonly PlatformerModel model = GetModel<PlatformerModel>();
         public Collider2D FacingCollider { get; set; } //test
@@ -32,7 +29,6 @@ namespace Platformer.Mechanics
         [SerializeField]
         public InputActionAsset controls;
 
-        // You can also have a non-serialized public property if needed
         public InputActionAsset Controls
         {
             get { return controls; }
@@ -74,7 +70,6 @@ namespace Platformer.Mechanics
             var playerActionMap = controls.FindActionMap("Player");
             playerActionMap.Enable();
 
-            // Get the 'Grab' action and subscribe to its events.
             var grabAction = playerActionMap.FindAction("Grab");
             grabAction.performed += OnGrabPerformed;
             grabAction.canceled += OnGrabCanceled;
@@ -117,7 +112,6 @@ namespace Platformer.Mechanics
             move.x = Mathf.Clamp(move.x, -Constants.MaxSpeed, Constants.MaxSpeed);
             ResetVelocity();
         }
-
 
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
@@ -169,6 +163,30 @@ namespace Platformer.Mechanics
             }
         }
 
+
+        public void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.name == "Level")
+            {
+                return;
+            }
+            else if (collision.collider.name == "Wall")
+            {
+                FacingCollider = collision.collider;
+            }
+            else if (collision.collider.name == "Enemy" && playerActions.rollState == ActionState.Acting)
+            {
+                CapsuleCollider2D enemyCollider = collision.collider.GetComponent<CapsuleCollider2D>();
+                enemyCollider.isTrigger = true;
+                StartCoroutine(ResetColliderAfterRoll(enemyCollider));
+            }
+        }
+
+        IEnumerator ResetColliderAfterRoll(CapsuleCollider2D collider)
+        {
+            yield return new WaitForSeconds(Constants.RollDuration);
+            collider.isTrigger = false;
+        }
 
         private void OnGrabPerformed(InputAction.CallbackContext context)
         {

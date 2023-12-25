@@ -15,6 +15,7 @@ public class PlayerActionController : MonoBehaviour
     }
 
     #region Jumping
+    [SerializeField]
     public ActionState jumpState = ActionState.Ready;
     public bool IsJumping => jumpState == ActionState.Preparing || jumpState == ActionState.Acting || jumpState == ActionState.InAction || !stopJump;
     public bool stopJump;
@@ -30,17 +31,20 @@ public class PlayerActionController : MonoBehaviour
 
     #region Sprinting
     public float sprintSpeed = Constants.DefaultMaxSpeed * Constants.SprintSpeedMultiplier;
+    [SerializeField]
     public float sprintDuration = Constants.SprintDuration; // seconds
+    [SerializeField]
     public ActionState sprintState = ActionState.Ready;
     public bool IsSprinting => sprintState == ActionState.Preparing || sprintState == ActionState.Acting || sprintState == ActionState.InAction || !stopSprint;
     public bool stopSprint;
     #endregion
 
     #region Rolling
-    [SerializeField]
     public float rollSpeed = Constants.DefaultMaxSpeed * Constants.RollSpeedMultiplier;
+    [SerializeField]
     public float rollDuration = Constants.RollDuration; // seconds
     public bool IsRollCancellable = true;
+    [SerializeField]
     public ActionState rollState = ActionState.Ready;
     public bool IsRolling => rollState == ActionState.Preparing || rollState == ActionState.Acting || rollState == ActionState.InAction || !stopRoll;
     public bool stopRoll;
@@ -51,10 +55,10 @@ public class PlayerActionController : MonoBehaviour
         switch (rollState)
         {
             case ActionState.Preparing:
-                rollState = ActionState.Acting;
-                stopRoll = false;
                 Constants.MaxSpeed = Constants.DefaultMaxSpeed * Constants.RollSpeedMultiplier;
                 rollDuration = Constants.RollDuration;
+                rollState = ActionState.Acting;
+                stopRoll = false;
                 break;
 
             case ActionState.Acting:
@@ -64,9 +68,12 @@ public class PlayerActionController : MonoBehaviour
                 }
                 else
                 {
+                    float rollDirection = sprite.flipX ? -1 : 1;
                     move.x = (sprite.flipX ? -1 : 1) * rollSpeed;
-                    //move.x = rollSpeed * (player.IsFacingLeft ? -1 : 1);
-
+                    /*animation for the non-cancellable roll*/
+                    //player.velocity.x = move.x;
+                    player.transform.Translate(rollDirection * rollSpeed * Time.deltaTime, 0, 0);
+                    rollDuration -= Time.deltaTime;
                 }
                 break;
 
@@ -74,10 +81,10 @@ public class PlayerActionController : MonoBehaviour
                 rollState = ActionState.Ready;
                 stopRoll = false;
                 Constants.MaxSpeed = Constants.DefaultMaxSpeed;
-
                 break;
         }
     }
+
 
     public void UpdateSprintState(Vector2 move, Vector2 velocity)
     {
@@ -85,9 +92,9 @@ public class PlayerActionController : MonoBehaviour
         {
             case ActionState.Preparing:
                 Constants.MaxSpeed = Constants.DefaultMaxSpeed * Constants.SprintSpeedMultiplier;
+                sprintDuration = Constants.SprintDuration; // Reset the sprint duration
                 sprintState = ActionState.Acting;
                 stopSprint = false;
-                sprintDuration = Constants.SprintDuration; // Reset the sprint duration
                 break;
 
             case ActionState.Acting:
