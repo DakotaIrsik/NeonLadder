@@ -20,7 +20,6 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
-
         #region Jumping
         public float JumpTakeOffSpeed = 7;
         public JumpState jumpState = JumpState.Grounded;
@@ -61,13 +60,13 @@ namespace Platformer.Mechanics
         public Health health;
         public bool controlEnabled = true;
         [SerializeField]
-        private InputActionAsset playerControlsAsset;
+        public InputActionAsset controls;
 
         // You can also have a non-serialized public property if needed
-        public InputActionAsset PlayerControlsAsset
+        public InputActionAsset Controls
         {
-            get { return playerControlsAsset; }
-            set { playerControlsAsset = value; }
+            get { return controls; }
+            set { controls = value; }
         }
 
         Vector2 move;
@@ -86,7 +85,7 @@ namespace Platformer.Mechanics
             if (bindingOutput == string.Empty)
             {
                 var fullBindings = new List<string>();
-                foreach (var action in PlayerControlsAsset.FindActionMap("Player").actions)
+                foreach (var action in Controls.FindActionMap("Player").actions)
                 {
                     var bindings = action.bindings.Select(b =>
                     {
@@ -102,7 +101,7 @@ namespace Platformer.Mechanics
                 Debug.Log(string.Join("\n", fullBindings));
             }
 
-            var playerActionMap = playerControlsAsset.FindActionMap("Player");
+            var playerActionMap = controls.FindActionMap("Player");
             playerActionMap.Enable();
 
             // Get the 'Grab' action and subscribe to its events.
@@ -141,6 +140,14 @@ namespace Platformer.Mechanics
             }
         }
 
+        public void ResetMovement()
+        {
+            ApplyGravity();
+            GroundedAnimation();
+            move.x = Mathf.Clamp(move.x, -maxSpeed, maxSpeed);
+            ResetVelocity();
+        }
+
 
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
@@ -160,8 +167,6 @@ namespace Platformer.Mechanics
             }
         }
 
-
-
         private string FormatDeviceName(string deviceName)
         {
             switch (deviceName)
@@ -178,7 +183,6 @@ namespace Platformer.Mechanics
                     return deviceName; // Return the original name if not recognized
             }
         }
-
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
@@ -417,10 +421,7 @@ namespace Platformer.Mechanics
             }
 
 
-            ApplyGravity();
-            GroundedAnimation();
-            move.x = Mathf.Clamp(move.x, -maxSpeed, maxSpeed);
-            ResetVelocity();
+            ResetMovement();
         }
 
         public void ApplyGravity(float gravity = DefaultGravity)
