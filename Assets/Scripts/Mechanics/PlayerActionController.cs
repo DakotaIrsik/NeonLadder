@@ -18,7 +18,7 @@ namespace Platformer.Mechanics
 
         private void Start()
         {
-            PrintDebugControlConfiruation();
+            PrintDebugControlConfiguration();
             ConfigureControls();
         }
 
@@ -42,7 +42,68 @@ namespace Platformer.Mechanics
             var slideAction = playerActionMap.FindAction("Slide");
             slideAction.performed += OnSlidePerformed;
             slideAction.canceled += OnSlideCanceled;
+
+            var moveLeftAction = playerActionMap.FindAction("MoveLeft");
+            moveLeftAction.performed += OnMoveLeftPerformed;
+            moveLeftAction.canceled += OnMoveCanceled;
+
+            var moveRightAction = playerActionMap.FindAction("MoveRight");
+            moveRightAction.performed += OnMoveRightPerformed;
+            moveRightAction.canceled += OnMoveCanceled;
+
+            var moveUpAction = playerActionMap.FindAction("MoveUp");
+            moveUpAction.performed += OnJumpPerformed;
+            moveUpAction.canceled += OnJumpCanceled;
+
+            //var moveDownAction = playerActionMap.FindAction("MoveDown");
+            //moveDownAction.performed += OnCrouchPerformed;
+            //moveDownAction.canceled += OnCrouchCanceled;
+
+            var crouchAction = playerActionMap.FindAction("Crouch");
+            crouchAction.performed += OnCrouchPerformed;
+            crouchAction.canceled += OnCrouchCanceled;
         }
+
+        private void PrintDebugControlConfiguration()
+        {
+            if (bindingOutput == string.Empty)
+            {
+                var actionBindings = new Dictionary<string, List<string>>();
+
+                // Iterate through each action and collect its bindings
+                foreach (var action in player.Controls.FindActionMap("Player").actions)
+                {
+                    foreach (var binding in action.bindings)
+                    {
+                        string deviceName = FormatDeviceName(binding.path.Split('/')[0].Replace("<", "").Replace(">", "")); // Extract and format device name
+                        string controlName = binding.path.Split('/').Last();
+
+                        // Format the binding string
+                        string formattedBinding = $"{controlName} ({deviceName})";
+
+                        // Add to the dictionary
+                        if (!actionBindings.ContainsKey(action.name))
+                        {
+                            actionBindings[action.name] = new List<string>();
+                        }
+                        actionBindings[action.name].Add(formattedBinding);
+                    }
+                }
+
+                // Format the final output
+                var fullBindings = new List<string>();
+                foreach (var actionBinding in actionBindings)
+                {
+                    string actionName = actionBinding.Key;
+                    string bindings = string.Join(", ", actionBinding.Value);
+                    fullBindings.Add($"{actionName} = {bindings}");
+                }
+
+                bindingOutput = string.Join("\n", fullBindings);
+                Debug.Log(bindingOutput);
+            }
+        }
+
 
         #region Jumping
         [SerializeField]
@@ -103,7 +164,7 @@ namespace Platformer.Mechanics
                         animation for the non-cancellable slide */
                         move.x = (sprite.flipX ? -1 : 1) * slideSpeed;
                         player.velocity.x = move.x;
-                        
+
                         player.transform.Translate(slideDirection * slideSpeed * Time.deltaTime, 0, 0);
 
                         //var playerInput = player.controls.FindActionMap("Player").FindAction("Move").ReadValue<Vector2>();
@@ -213,6 +274,16 @@ namespace Platformer.Mechanics
             }
         }
 
+        private void OnCrouchCanceled(InputAction.CallbackContext context)
+        {
+            player.transform.localScale = new Vector3(Constants.DefaultCharacterScale, Constants.DefaultCharacterScale, 1);
+        }
+
+        private void OnCrouchPerformed(InputAction.CallbackContext context)
+        {
+            player.transform.localScale = new Vector3(Constants.CrouchScale, Constants.CrouchScale, 1);
+        }
+
         private void OnGrabPerformed(InputAction.CallbackContext context)
         {
             if (player.FacingCollider != null)
@@ -283,28 +354,20 @@ namespace Platformer.Mechanics
             }
         }
 
-        private void PrintDebugControlConfiruation()
+        private void OnMoveCanceled(InputAction.CallbackContext context)
         {
-            if (bindingOutput == string.Empty)
-            {
-                var fullBindings = new List<string>();
-                foreach (var action in player.Controls.FindActionMap("Player").actions)
-                {
-                    var bindings = action.bindings.Select(b =>
-                    {
-                        string deviceName = b.path.Split('/')[0].Replace("<", "").Replace(">", ""); // Extract device name
-                        string controlName = b.path.Split('/').Last();
-                        string formattedDeviceName = FormatDeviceName(deviceName); // Format the device name for readability
-                        return $"{formattedDeviceName}: {controlName} \n";
-                    });
-
-                    fullBindings.Add($"Name: {action.name} -> \n{string.Join("", bindings)}");
-                }
-                bindingOutput = string.Join("\n", fullBindings);
-                Debug.Log(string.Join("\n", fullBindings));
-            }
+            player.UpdateMoveDirection(0);
         }
 
+        private void OnMoveRightPerformed(InputAction.CallbackContext context)
+        {
+            player.moveDirection = 1;
+        }
+
+        private void OnMoveLeftPerformed(InputAction.CallbackContext context)
+        {
+            player.moveDirection = -1;
+        }
 
 
         private void OnJumpCanceled(InputAction.CallbackContext context)
@@ -322,9 +385,9 @@ namespace Platformer.Mechanics
             {
                 case "Keyboard":
                     return "Keyboard";
-                case "XInputContsprinter":
+                case "XInputController":
                     return "Xbox"; // maybe also steam?
-                case "SwitchProContsprinterHID":
+                case "SwitchProControllerHID":
                     return "Nintendo Switch";
                 case "DualShockGamepad":// Add more cases as needed for other devices
                     return "Playstation";

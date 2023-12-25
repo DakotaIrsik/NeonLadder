@@ -11,12 +11,11 @@ namespace Platformer.Mechanics
     public class PlayerController : KinematicObject
     {
 
+        public int moveDirection;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
         [SerializeField]
         public PlayerActionController playerActions;
-        public bool IsFacingLeft => spriteRenderer.flipX;
-        public bool IsFacingRight => !IsFacingLeft;
         public Collider2D collider2d { get; set; }
         public readonly PlatformerModel model = GetModel<PlatformerModel>();
         public Collider2D FacingCollider { get; set; } //test
@@ -91,15 +90,15 @@ namespace Platformer.Mechanics
         {
             if (controlEnabled)
             {
-                HorizontalMovement();
                 playerActions.HandleWallGrab(velocity);
             }
         }
 
-        public void HorizontalMovement()
+        public void UpdateMoveDirection(int direction)
         {
-            move.x = Input.GetAxis("Horizontal");
+            moveDirection = direction;
         }
+
 
         protected override void ComputeVelocity()
         {
@@ -117,13 +116,14 @@ namespace Platformer.Mechanics
                 }
             }
 
-            if (move.x > 0.01f)
+            if (moveDirection != 0)
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = moveDirection < 0;
+                move.x = moveDirection;
             }
-            else if (move.x < -0.01f)
+            else
             {
-                spriteRenderer.flipX = true;
+                move.x = 0; // Stop movement when moveDirection is zero
             }
 
             if (playerActions.grabState == ActionState.Acting)

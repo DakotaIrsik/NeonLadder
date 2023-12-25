@@ -14,7 +14,6 @@ namespace Platformer.Gameplay
         public override void Execute()
         {
             var player = model.player;
-            player.HorizontalMovement();
             player.collider2d.enabled = true;
             player.controlEnabled = false;
             if (player.audioSource && player.respawnAudio)
