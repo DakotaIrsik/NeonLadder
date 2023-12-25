@@ -1,4 +1,8 @@
-﻿namespace Assets.Scripts
+﻿using static UnityEngine.UIElements.UxmlAttributeDescription;
+using Unity.Play.Publisher.Editor;
+using UnityEditor.PackageManager.UI;
+
+namespace Assets.Scripts
 {
     public static class Constants
     {
@@ -18,12 +22,14 @@
         #region actions
         public const float JumpDuration = 0.5f;
         public const float JumpCooldown = 0.5f;
+        /// <summary>
+        /// The JumpCutOffFactor is a multiplier used to reduce the upward velocity of the player's character when the jump button is released before reaching the maximum jump height. This factor allows for variable jump heights, providing a more dynamic and responsive jumping mechanic in the game. Here's a detailed explanation and some sample values:
+        /// </summary>
+        public const float JumpCutOffFactor = 0.5f; 
         public const float WallJumpForce = 5.0f;
-
         public const float SprintDuration = 1f;
         public const float SprintCooldown = 1f;
         public const float SprintSpeedMultiplier = 1.5f;
-
         public const float SlideDuration = .25f;
         public const float SlideCooldown = 1f;
         public const float SlideSpeedMultiplier = 1.75f;

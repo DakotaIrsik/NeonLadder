@@ -10,7 +10,7 @@ namespace Platformer.Mechanics
 {
     public class PlayerController : KinematicObject
     {
-        public AudioClip jumpAudio;
+
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
         [SerializeField]
@@ -92,7 +92,6 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 HorizontalMovement();
-                playerActions.HandleJump();
                 playerActions.HandleWallGrab(velocity);
             }
         }

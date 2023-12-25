@@ -1,13 +1,12 @@
 using Assets.Scripts;
 using Platformer.Gameplay;
-using Platformer.Mechanics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Assets.Scripts.Mechanics.MechanicEnums;
 using static Platformer.Core.Simulation;
-using static UnityEngine.InputSystem.DefaultInputActions;
 namespace Platformer.Mechanics
 {
 
@@ -15,11 +14,34 @@ namespace Platformer.Mechanics
     {
         private string bindingOutput = string.Empty;
         public PlayerController player;
+        public AudioClip jumpAudio;
 
         private void Start()
         {
-            DebugControlConfiruation();
+            PrintDebugControlConfiruation();
             ConfigureControls();
+        }
+
+        private void ConfigureControls()
+        {
+            var playerActionMap = player.controls.FindActionMap("Player");
+            playerActionMap.Enable();
+
+            var grabAction = playerActionMap.FindAction("Grab");
+            grabAction.performed += OnGrabPerformed;
+            grabAction.canceled += OnGrabCanceled;
+
+            var jumpAction = playerActionMap.FindAction("Jump");
+            jumpAction.performed += OnJumpPerformed;
+            jumpAction.canceled += OnJumpCanceled;
+
+            var sprintAction = playerActionMap.FindAction("Sprint");
+            sprintAction.performed += OnSprintPerformed;
+            sprintAction.canceled += OnSprintCanceled;
+
+            var slideAction = playerActionMap.FindAction("Slide");
+            slideAction.performed += OnSlidePerformed;
+            slideAction.canceled += OnSlideCanceled;
         }
 
         #region Jumping
@@ -165,15 +187,6 @@ namespace Platformer.Mechanics
             }
         }
 
-        public void HandleJump()
-        {
-            if (Input.GetButtonUp("Jump"))
-            {
-                stopJump = true;
-                Schedule<PlayerStopJump>().player = player;
-            }
-        }
-
         public void HandleWallGrab(Vector2 velocity)
         {
             if (grabState == ActionState.Acting)
@@ -248,6 +261,9 @@ namespace Platformer.Mechanics
                 }
                 player.velocity.y = Constants.JumpTakeOffSpeed * player.model.jumpModifier;
             }
+
+            stopJump = true;
+            Schedule<PlayerStopJump>().player = player;
         }
 
         private void OnSlidePerformed(InputAction.CallbackContext context)
@@ -267,7 +283,7 @@ namespace Platformer.Mechanics
             }
         }
 
-        private void DebugControlConfiruation()
+        private void PrintDebugControlConfiruation()
         {
             if (bindingOutput == string.Empty)
             {
@@ -289,25 +305,15 @@ namespace Platformer.Mechanics
             }
         }
 
-        private void ConfigureControls()
+
+
+        private void OnJumpCanceled(InputAction.CallbackContext context)
         {
-            var playerActionMap = player.controls.FindActionMap("Player");
-            playerActionMap.Enable();
-
-            var grabAction = playerActionMap.FindAction("Grab");
-            grabAction.performed += OnGrabPerformed;
-            grabAction.canceled += OnGrabCanceled;
-
-            var jumpAction = playerActionMap.FindAction("Jump");
-            jumpAction.performed += OnJumpPerformed;
-
-            var sprintAction = playerActionMap.FindAction("Sprint");
-            sprintAction.performed += OnSprintPerformed;
-            sprintAction.canceled += OnSprintCanceled;
-
-            var slideAction = playerActionMap.FindAction("Slide");
-            slideAction.performed += OnSlidePerformed;
-            slideAction.canceled += OnSlideCanceled;
+            if (IsJumping)
+            {
+                player.velocity.y *= Constants.JumpCutOffFactor;
+                stopJump = true;
+            }
         }
 
         private string FormatDeviceName(string deviceName)
