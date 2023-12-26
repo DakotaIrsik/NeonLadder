@@ -15,6 +15,7 @@ namespace Platformer.Mechanics
         public PlayerController player;
         public AudioClip jumpAudio;
         private Vector2 playerInput;
+        private float sprintTimeAccumulator = 0f;
 
         private void Start()
         {
@@ -227,6 +228,7 @@ namespace Platformer.Mechanics
                     sprintDuration = Constants.SprintDuration; // Reset the sprint duration
                     sprintState = ActionState.Acting;
                     stopSprint = false;
+                    sprintTimeAccumulator = 0f; // Reset the time accumulator
                     break;
 
                 case ActionState.Acting:
@@ -236,7 +238,14 @@ namespace Platformer.Mechanics
                     }
                     else
                     {
-                        // Apply sprint speed in the current movement direction
+                        sprintTimeAccumulator += Time.deltaTime;
+                        //Debug.Log(sprintTimeAccumulator);
+                        if (sprintTimeAccumulator >= 1f)
+                        {
+                            player.stamina.Decrement(1); // Decrement stamina
+                            sprintTimeAccumulator -= 1f; // Subtract one second from the accumulator
+                        }
+
                         if (Mathf.Abs(move.x) > 0)
                         {
                             velocity.x = Mathf.Sign(move.x) * sprintSpeed;
@@ -374,10 +383,13 @@ namespace Platformer.Mechanics
 
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
-            if (sprintState == ActionState.Ready)
+            if (!player.stamina.IsExhausted)
             {
-                sprintState = ActionState.Preparing;
-                stopSprint = false;
+                if (sprintState == ActionState.Ready)
+                {
+                    sprintState = ActionState.Preparing;
+                    stopSprint = false;
+                }
             }
         }
 

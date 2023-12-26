@@ -13,14 +13,17 @@
         public const float DefaultJumpTakeOffSpeed = 10f;
         public const float DefaultCharacterScale = 1f;
         public const int DefaultMaxHealth = 3;
+        public const int DefaultMaxStamina = 5;
         public const float DefaultKnockbackDuration = 0.25f; // Duration of the knockback effect
         public const float DefaultKnockbackSpeed = 2f;
         public const float DefaultKnockMultiplier = 1f;
+        public const float StaminaRegenRate = 5.0f;
 
         public static float MaxSpeed { get; set; } = DefaultMaxSpeed;
         public static float JumpTakeOffSpeed { get; set; } = DefaultJumpTakeOffSpeed;
         public static float CrouchScale { get; set; } = DefaultCharacterScale * 0.5f;
         public static int MaxHealth { get; set; } = DefaultMaxHealth;
+        public static int MaxStamina { get; set; } = DefaultMaxStamina;
         #endregion
 
         #region actions

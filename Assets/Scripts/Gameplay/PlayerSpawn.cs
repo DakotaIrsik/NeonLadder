@@ -19,6 +19,7 @@ namespace Platformer.Gameplay
             if (player.audioSource && player.respawnAudio)
                 player.audioSource.PlayOneShot(player.respawnAudio);
             player.health.Increment(Constants.DefaultMaxHealth);
+            player.stamina.Increment(Constants.DefaultMaxStamina);
             player.Teleport(model.spawnPoint.transform.position);
             player.playerActions.jumpState = Assets.Scripts.Mechanics.MechanicEnums.ActionState.Ready;
             player.animator.SetBool("dead", false);

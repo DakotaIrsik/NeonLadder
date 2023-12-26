@@ -20,10 +20,12 @@ namespace Platformer.Mechanics
         public readonly PlatformerModel model = GetModel<PlatformerModel>();
         public AudioSource audioSource;
         public Health health;
+        public Stamina stamina;
         public bool controlEnabled = true;
         [SerializeField]
         public InputActionAsset controls;
-
+        [SerializeField]
+        public float staminaRegenTimer = 0f;
 
         public InputActionAsset Controls
         {
@@ -47,10 +49,10 @@ namespace Platformer.Mechanics
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log("Collision detected with name: " + collision.collider.name + "\n Collision detected with tag: " + collision.collider.tag);
+            //Debug.Log("Collision detected with name: " + collision.collider.name + "\n Collision detected with tag: " + collision.collider.tag);
             if (collision.collider.name == "Enemy" && playerActions.slideState == ActionState.Acting)
             {
-                Debug.Log("Detected Enemy in front of player");
+                //Debug.Log("Detected Enemy in front of player");
                 CapsuleCollider2D enemyCollider = collision.collider.GetComponent<CapsuleCollider2D>();
                 enemyCollider.isTrigger = true;
                 StartCoroutine(ResetColliderAfterSlide(enemyCollider));
@@ -70,7 +72,18 @@ namespace Platformer.Mechanics
             playerActions.UpdateSprintState(move, velocity);
             playerActions.UpdateKnockbackstate();
             playerActions.UpdateSlideState();
+            RegenerateStamina();
             base.Update();
+        }
+
+        private void RegenerateStamina()
+        {
+            staminaRegenTimer += Time.deltaTime;
+            if (staminaRegenTimer >= Constants.StaminaRegenRate)
+            {
+                stamina.Increment(1); // Increment stamina by 1 (or your desired amount)
+                staminaRegenTimer = 0f; // Reset the timer
+            }
         }
 
         private void HandleInput()
