@@ -134,6 +134,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2ac445db-8e05-461b-8181-a44655d3e40d",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7e768ecd-9935-46fa-af56-a9d5eff84296",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -257,6 +268,17 @@
                     "name": "",
                     "id": "3cf8f34d-a805-4829-bc1a-ab8140600495",
                     "path": "<DualShockGamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a76362c2-8895-466f-a495-cc3489ae4f4f",
+                    "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
