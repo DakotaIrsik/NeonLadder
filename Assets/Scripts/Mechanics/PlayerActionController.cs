@@ -1,6 +1,5 @@
 using Assets.Scripts;
 using Platformer.Gameplay;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +14,7 @@ namespace Platformer.Mechanics
         private string bindingOutput = string.Empty;
         public PlayerController player;
         public AudioClip jumpAudio;
+        private Vector2 playerInput;
 
         private void Start()
         {
@@ -41,7 +41,6 @@ namespace Platformer.Mechanics
 
             var slideAction = playerActionMap.FindAction("Slide");
             slideAction.performed += OnSlidePerformed;
-            slideAction.canceled += OnSlideCanceled;
 
             var moveLeftAction = playerActionMap.FindAction("MoveLeft");
             moveLeftAction.performed += OnMoveLeftPerformed;
@@ -108,80 +107,100 @@ namespace Platformer.Mechanics
         #region Jumping
         [SerializeField]
         public ActionState jumpState = ActionState.Ready;
-        public bool IsJumping => jumpState == ActionState.Preparing || jumpState == ActionState.Acting || jumpState == ActionState.InAction || !stopJump;
-        public bool stopJump;
+        [SerializeField]
         public bool jump;
+        public bool IsJumping => jumpState == ActionState.Preparing || jumpState == ActionState.Acting || jumpState == ActionState.InAction || !stopJump;
+        [SerializeField]
+        public bool stopJump;
+
         #endregion
 
         #region Grabbing
         [SerializeField]
         public ActionState grabState = ActionState.Ready;
         public bool IsGrabbing => grabState == ActionState.Acting || grabState == ActionState.InAction || !stopGrab;
+        [SerializeField]
         public bool stopGrab;
         #endregion
 
         #region Sprinting
+        [SerializeField]
         public float sprintSpeed = Constants.DefaultMaxSpeed * Constants.SprintSpeedMultiplier;
         [SerializeField]
         public float sprintDuration = Constants.SprintDuration; // seconds
         [SerializeField]
         public ActionState sprintState = ActionState.Ready;
         public bool IsSprinting => sprintState == ActionState.Preparing || sprintState == ActionState.Acting || sprintState == ActionState.InAction || !stopSprint;
+        [SerializeField]
         public bool stopSprint;
         #endregion
 
         #region Slideing
+        [SerializeField]
         public float slideSpeed = Constants.DefaultMaxSpeed * Constants.SlideSpeedMultiplier;
         [SerializeField]
         public float slideDuration = Constants.SlideDuration; // seconds
-        public bool IsSlideCancellable = true;
         [SerializeField]
         public ActionState slideState = ActionState.Ready;
         public bool IsSliding => slideState == ActionState.Preparing || slideState == ActionState.Acting || slideState == ActionState.InAction || !stopSlide;
+        [SerializeField]
         public bool stopSlide;
         #endregion
 
-        public void UpdateSlideState(Vector2 move, SpriteRenderer sprite)
+        public void UpdateSlideState()
         {
+            var playerRigidbody = player.GetComponent<Rigidbody2D>();
+            var atAWall = player.collider2d.IsTouchingLayers(LayerMask.GetMask("Walls"));
             switch (slideState)
             {
                 case ActionState.Preparing:
                     Constants.MaxSpeed = Constants.DefaultMaxSpeed * Constants.SlideSpeedMultiplier;
-                    slideDuration = Constants.SlideDuration;
+                    slideDuration = Constants.SlideDuration; // Reset the sprint duration
                     slideState = ActionState.Acting;
-                    stopSlide = false;
+                    //animation etc.
                     break;
-
                 case ActionState.Acting:
-                    if ((IsSlideCancellable && stopSlide) || slideDuration <= 0)
+                    if (stopSlide || slideDuration <= 0 || atAWall)
                     {
+                        // Stop sliding
+                        
+                        stopSlide = true;
                         slideState = ActionState.Acted;
+                        //move players x position away from the wall slightly.
+     
+                            player.transform.position = new Vector2(player.transform.position.x + (player.spriteRenderer.flipX ? 1 : -1) * 0.25f, player.transform.position.y);
+                    
+                    }
+                    else if (playerInput != Vector2.zero)
+                    {
+                        Vector3 slideDirection = new Vector3(playerInput.x, 0, playerInput.y);
+                        playerRigidbody.velocity = slideDirection * slideSpeed;
+                        slideDuration -= Time.deltaTime;
                     }
                     else
                     {
-                        float slideDirection = sprite.flipX ? -1 : 1;
-                        /*
-                        animation for the non-cancellable slide */
-                        move.x = (sprite.flipX ? -1 : 1) * slideSpeed;
-                        player.velocity.x = move.x;
-
-                        player.transform.Translate(slideDirection * slideSpeed * Time.deltaTime, 0, 0);
-
-                        //var playerInput = player.controls.FindActionMap("Player").FindAction("Move").ReadValue<Vector2>();
-                        //Vector3 slideDirection = new Vector3(playerInput.x, 0, playerInput.y).normalized;
-                        //Rigidbody playerRigidbody = player.GetComponent<Rigidbody>();
-                        //playerRigidbody.velocity = slideDirection * slideSpeed;
                         slideDuration -= Time.deltaTime;
                     }
+                    //animation etc.
                     break;
-
                 case ActionState.Acted:
                     slideState = ActionState.Ready;
                     stopSlide = false;
-                    Constants.MaxSpeed = Constants.DefaultMaxSpeed;
+                    Constants.MaxSpeed = Constants.DefaultMaxSpeed; // Reset world speed
+                    if (atAWall)
+                    {
+                        // If at a wall, reset only horizontal velocity
+                        playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+                    }
+                    else
+                    {
+                        // If not at a wall, reset all velocity
+                        playerRigidbody.velocity = Vector2.zero;
+                    }
                     break;
             }
         }
+
 
         public void UpdateSprintState(Vector2 move, Vector2 velocity)
         {
@@ -286,8 +305,9 @@ namespace Platformer.Mechanics
 
         private void OnGrabPerformed(InputAction.CallbackContext context)
         {
-            if (player.FacingCollider != null)
-            {
+            //if player is facing the wall
+            if (player.collider2d.IsTouchingLayers(LayerMask.GetMask("Walls")))
+            { 
                 grabState = ActionState.Acting;
                 player.velocity = -Constants.DefaultGravity * Constants.PercentageOfGravityWhileGrabbing * Time.deltaTime * -Vector2.up;
 
@@ -321,7 +341,7 @@ namespace Platformer.Mechanics
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
-            if (jumpState == ActionState.Ready || (grabState == ActionState.Acting && player.FacingCollider != null))
+            if (jumpState == ActionState.Ready || (grabState == ActionState.Acting && player.collider2d.IsTouchingLayers(LayerMask.GetMask("Level"))))
             {
                 jumpState = ActionState.Preparing;
 
@@ -346,27 +366,23 @@ namespace Platformer.Mechanics
             }
         }
 
-        private void OnSlideCanceled(InputAction.CallbackContext context)
-        {
-            if (IsSliding)
-            {
-                stopSlide = true;
-            }
-        }
-
-        private void OnMoveCanceled(InputAction.CallbackContext context)
-        {
-            player.UpdateMoveDirection(0);
-        }
 
         private void OnMoveRightPerformed(InputAction.CallbackContext context)
         {
             player.moveDirection = 1;
+            playerInput = new Vector2(1, 0); // Assuming right movement is along the positive x-axis
         }
 
         private void OnMoveLeftPerformed(InputAction.CallbackContext context)
         {
             player.moveDirection = -1;
+            playerInput = new Vector2(-1, 0); // Assuming left movement is along the negative x-axis
+        }
+
+        private void OnMoveCanceled(InputAction.CallbackContext context)
+        {
+            player.UpdateMoveDirection(0);
+            playerInput = Vector2.zero; // No movement input
         }
 
 

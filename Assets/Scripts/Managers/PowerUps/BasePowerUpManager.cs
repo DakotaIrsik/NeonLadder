@@ -85,7 +85,6 @@ public abstract class BasePowerUpManager : MonoBehaviour
         UpdateTimeTrackerUI();
 
         Collider.gameObject.SetActive(false);
-        Player.FacingCollider = null;
         RemoveBuffEffect(buff);
         ActiveBuffs.Remove(buff);
     }
@@ -103,6 +102,5 @@ public abstract class BasePowerUpManager : MonoBehaviour
     protected virtual void RemoveBuffEffect(Buff buff)
     {
         Collider.gameObject.SetActive(false);
-        Player.FacingCollider = null;
     }
 }

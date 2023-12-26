@@ -18,7 +18,6 @@ namespace Platformer.Mechanics
         public PlayerActionController playerActions;
         public Collider2D collider2d { get; set; }
         public readonly PlatformerModel model = GetModel<PlatformerModel>();
-        public Collider2D FacingCollider { get; set; } //test
         public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
@@ -47,27 +46,19 @@ namespace Platformer.Mechanics
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.name == "Level")
+            Debug.Log("Collision detected with name: " + collision.collider.name + "\n Collision detected with tag: " + collision.collider.tag);
+            if (collision.collider.name == "Enemy" && playerActions.slideState == ActionState.Acting)
             {
-                if (playerActions.slideState == ActionState.Acting)
-                {
-                    playerActions.stopSlide = true;
-                }
-            }
-            else if (collision.collider.name == "Wall")
-            {
-                FacingCollider = collision.collider;
-                if (playerActions.slideState == ActionState.Acting)
-                {
-                    playerActions.stopSlide = true;
-                }   
-            }
-            else if (collision.collider.name == "Enemy" && playerActions.slideState == ActionState.Acting)
-            {
+                Debug.Log("Detected Enemy in front of player");
                 CapsuleCollider2D enemyCollider = collision.collider.GetComponent<CapsuleCollider2D>();
                 enemyCollider.isTrigger = true;
                 StartCoroutine(ResetColliderAfterSlide(enemyCollider));
             }
+        }
+
+        public void OnCollisionExit2D(Collision2D collision)
+        {
+
         }
 
         IEnumerator ResetColliderAfterSlide(CapsuleCollider2D collider)
@@ -82,7 +73,7 @@ namespace Platformer.Mechanics
             playerActions.UpdateJumpState(IsGrounded);
             playerActions.UpdateGrabState(velocity);
             playerActions.UpdateSprintState(move, velocity);
-            playerActions.UpdateSlideState(move, spriteRenderer);
+            playerActions.UpdateSlideState();
             base.Update();
         }
 
@@ -97,6 +88,12 @@ namespace Platformer.Mechanics
         public void UpdateMoveDirection(int direction)
         {
             moveDirection = direction;
+        }
+
+        public void StopSlide()
+        {
+            // Reset velocity or modify movement logic to stop sliding
+            velocity = Vector2.zero; // Or appropriate logic to stop sliding
         }
 
 
@@ -145,7 +142,7 @@ namespace Platformer.Mechanics
             }
         }
 
-        private void GroundedAnimation()
+        public void GroundedAnimation()
         {
             animator.SetBool("grounded", IsGrounded);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / Constants.MaxSpeed);

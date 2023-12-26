@@ -30,9 +30,9 @@
         public const float SprintCooldown = 1f;
         public const float SprintSpeedMultiplier = 1.5f;
 
-        public const float SlideDuration = .25f;
+        public const float SlideDuration = 0.5f;
         public const float SlideCooldown = 1f;
-        public const float SlideSpeedMultiplier = 1.75f;
+        public const float SlideSpeedMultiplier = 1f;
 
         public const float GrabDuration = 0.5f;
         public const float GrabCooldown = 1f;

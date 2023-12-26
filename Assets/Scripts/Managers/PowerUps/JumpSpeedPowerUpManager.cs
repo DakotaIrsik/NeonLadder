@@ -29,13 +29,6 @@ public class JumpSpeedPowerUpManager : BasePowerUpManager
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Player.FacingCollider = null;
-        }
-    }
     protected override void ApplyPermanentBuffEffect(Buff buff)
     {
         Constants.JumpTakeOffSpeed += buff.Magnitude * Constants.DefaultJumpTakeOffSpeed;
