@@ -1,7 +1,6 @@
 using Assets.Scripts;
 using Platformer.Gameplay;
 using Platformer.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,12 +15,25 @@ namespace Platformer.Mechanics
         public MetaGameController meta;
         private string bindingOutput = string.Empty;
         public PlayerController player;
+        public LineRenderer aim;
         public AudioClip jumpAudio;
         private Vector2 playerInput;
         private float sprintTimeAccumulator = 0f;
+        private Vector3 currentAimDirection;
+        private bool isAiming = false;
+        private float aimDistance = 5f;
 
         private void Start()
         {
+            if (aim != null)
+            {
+                aim.positionCount = 2; // Line has two points
+                aim.SetPosition(0, player.transform.position); // Starting point at player's position
+                aim.SetPosition(1, player.transform.position); // End point also at player's position initially
+                                                               // Set color and width as desired
+            }   aim.startColor = Color.red;
+            aim.endColor = Color.red;
+            aim.startWidth = .25f;
             PrintDebugControlConfiguration();
             ConfigureControls();
         }
@@ -65,6 +77,46 @@ namespace Platformer.Mechanics
 
             var menuAction = playerActionMap.FindAction("Menu");
             menuAction.performed += OnMenuPerformed;
+
+            var aimAction = playerActionMap.FindAction("Aim");
+            aimAction.performed += OnAimPerformed;
+
+        }
+
+        private void OnAimPerformed(InputAction.CallbackContext context)
+        {
+            Vector2 aimDirection = context.ReadValue<Vector2>();
+
+            Debug.Log(string.Join(",", context.control.device.aliases.Select(a => a)));
+            Debug.Log(context.control.device.name);
+
+
+            if(context.control.device is Mouse)
+            {
+                // Convert mouse position to world direction
+                AimWithMouse();
+            }
+            else
+            {
+                // Convert joystick input to world direction
+                AimWithJoystick(aimDirection);
+            }
+        }
+
+        private void AimWithJoystick(Vector2 joystickDirection)
+        {
+            // Your existing code...
+            currentAimDirection = new Vector3(joystickDirection.x, joystickDirection.y, 0).normalized;
+            isAiming = true;
+        }
+
+        private void AimWithMouse()
+        {
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            mouseWorldPosition.z = 0; // Assuming 2D game
+            Vector3 aimDirection = mouseWorldPosition - transform.position;
+            currentAimDirection = aimDirection.normalized;
+            isAiming = true;
         }
 
         private void OnMenuPerformed(InputAction.CallbackContext context)
@@ -170,6 +222,28 @@ namespace Platformer.Mechanics
         public ActionState knockbackState = ActionState.Ready;
         public bool IsKnockedBack => knockbackState == ActionState.Preparing || sprintState == ActionState.Acting || sprintState == ActionState.InAction || knockback;
         #endregion
+
+        private void Update()
+        {
+            // Other update code...
+
+            // Update the aim line if the player is aiming
+            if (isAiming) // You need a variable to track whether the player is currently aiming
+            {
+                UpdateAimLine();
+            }
+        }
+
+        private void UpdateAimLine()
+        {
+            if (aim != null)
+            {
+                aim.SetPosition(0, player.transform.position); // Always start at player's position
+
+                Vector3 aimEndPoint = player.transform.position + currentAimDirection * aimDistance; // Calculate the end point
+                aim.SetPosition(1, aimEndPoint); // Set the end point of the line
+            }
+        }
 
 
         public void UpdateSlideState()
