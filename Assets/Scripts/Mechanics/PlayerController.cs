@@ -45,6 +45,17 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+
+            StartCoroutine(DelayedToggleMainMenu());
+        }
+
+        IEnumerator DelayedToggleMainMenu()
+        {
+            // Wait for 3 seconds
+            yield return new WaitForSeconds(3);
+
+            // Toggle main menu after the delay
+            playerActions.meta.ToggleMainMenu(true);
         }
 
 
@@ -112,11 +123,10 @@ namespace Platformer.Mechanics
             if (playerActions.jump && IsGrounded)
             {
                 velocity.y = Constants.JumpTakeOffSpeed * model.jumpModifier;
-                playerActions.jump = false;
             }
             else if (playerActions.stopJump)
             {
-                playerActions.stopJump = false;
+
                 if (velocity.y > 0)
                 {
                     velocity.y = velocity.y * model.jumpDeceleration;

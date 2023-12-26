@@ -1,5 +1,7 @@
 using Assets.Scripts;
 using Platformer.Gameplay;
+using Platformer.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +13,7 @@ namespace Platformer.Mechanics
 
     public class PlayerActionController : MonoBehaviour
     {
+        public MetaGameController meta;
         private string bindingOutput = string.Empty;
         public PlayerController player;
         public AudioClip jumpAudio;
@@ -55,13 +58,18 @@ namespace Platformer.Mechanics
             moveUpAction.performed += OnJumpPerformed;
             moveUpAction.canceled += OnJumpCanceled;
 
-            //var moveDownAction = playerActionMap.FindAction("MoveDown");
-            //moveDownAction.performed += OnCrouchPerformed;
-            //moveDownAction.canceled += OnCrouchCanceled;
-
             var crouchAction = playerActionMap.FindAction("Crouch");
             crouchAction.performed += OnCrouchPerformed;
             crouchAction.canceled += OnCrouchCanceled;
+
+
+            var menuAction = playerActionMap.FindAction("Menu");
+            menuAction.performed += OnMenuPerformed;
+        }
+
+        private void OnMenuPerformed(InputAction.CallbackContext context)
+        {
+            meta.ToggleMainMenu(!meta.mainMenu.isActiveAndEnabled);
         }
 
         private void PrintDebugControlConfiguration()

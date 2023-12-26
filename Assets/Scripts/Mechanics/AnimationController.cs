@@ -51,11 +51,11 @@ namespace Platformer.Mechanics
             if (jump && IsGrounded)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
-                jump = false;
+                //jump = false;
             }
             else if (stopJump)
             {
-                stopJump = false;
+                //stopJump = false;
                 if (velocity.y > 0)
                 {
                     velocity.y = velocity.y * model.jumpDeceleration;
