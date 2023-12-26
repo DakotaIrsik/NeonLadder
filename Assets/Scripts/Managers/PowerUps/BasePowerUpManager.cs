@@ -61,7 +61,10 @@ public abstract class BasePowerUpManager : MonoBehaviour
         Mesh.gameObject.transform.up = new Vector3(0, 0, 10); //Out of Bound
     }
 
-    protected abstract void ApplyPermanentBuffEffect(Buff buff);
+    protected void ApplyPermanentBuffEffect(Buff buff)
+    {
+
+    }
 
     private IEnumerator HandleTemporaryBuff(Buff buff)
     {

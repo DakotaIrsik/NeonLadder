@@ -1,4 +1,4 @@
-using Platformer.Mechanics;
+using Platformer.Mechanics.Stats;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +16,6 @@ public class PlayerStaminaUIManager : MonoBehaviour
 
     private void Update()
     {
-        StaminaCounterTest.text = $"Stamina {playerStamina.currentStamina}/{playerStamina.maxStamina}";
+        StaminaCounterTest.text = $"Stamina {playerStamina.current}/{playerStamina.max}";
     }
 }

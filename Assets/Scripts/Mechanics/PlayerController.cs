@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Platformer.Mechanics.Stats;
 using Platformer.Model;
 using System.Collections;
 using UnityEngine;

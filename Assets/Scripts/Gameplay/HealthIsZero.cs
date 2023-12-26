@@ -1,4 +1,4 @@
-using Platformer.Mechanics;
+using Platformer.Mechanics.Stats;
 using static Platformer.Core.Simulation;
 
 namespace Platformer.Gameplay

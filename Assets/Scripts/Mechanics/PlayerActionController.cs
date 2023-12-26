@@ -307,7 +307,7 @@ namespace Platformer.Mechanics
                         knockbackState = ActionState.Acting;
                         break;
                     case ActionState.Acting:
-                        if (knockbackDuration <= 0 || player.health.currentHP == 0)
+                        if (knockbackDuration <= 0 || player.health.current == 0)
                         {
                             knockbackState = ActionState.Acted;
                         }

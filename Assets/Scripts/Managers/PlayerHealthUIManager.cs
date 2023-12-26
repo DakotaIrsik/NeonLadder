@@ -1,4 +1,4 @@
-using Platformer.Mechanics;
+using Platformer.Mechanics.Stats;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +16,6 @@ public class PlayerHealthUIManager : MonoBehaviour
 
     private void Update()
     {
-        HealthCounterText.text = $"Health {playerHealth.currentHP}/{playerHealth.maxHP}";
+        HealthCounterText.text = $"Health {playerHealth.current}/{playerHealth.max}";
     }
 }
