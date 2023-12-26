@@ -26,7 +26,7 @@ namespace Platformer.Gameplay
             if (!enemyCollider.isTrigger)
             {
                 var willHurtEnemy = player.Bounds.center.y >= enemy.Bounds.max.y;
-
+                var willHurtPlayer = !willHurtEnemy;
                 if (willHurtEnemy)
                 {
                     var enemyHealth = enemy.GetComponent<Health>();
@@ -49,10 +49,13 @@ namespace Platformer.Gameplay
                         player.Bounce(2);
                     }
                 }
-                else
+                
+                if (willHurtPlayer)
                 {
-                    Schedule<PlayerDeath>();
+                    player.health.Decrement();
+                    player.playerActions.knockback = true;
                 }
+
             }
         }
     }

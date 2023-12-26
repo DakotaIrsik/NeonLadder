@@ -147,6 +147,22 @@ namespace Platformer.Mechanics
         public bool stopSlide;
         #endregion
 
+
+        #region Knockback
+        [SerializeField]
+        public float knockbackDuration = Constants.DefaultKnockbackDuration;
+        [SerializeField]
+        public float knockbackSpeed = Constants.DefaultKnockbackSpeed;
+        [SerializeField]
+        public bool knockback;
+
+
+        [SerializeField]
+        public ActionState knockbackState = ActionState.Ready;
+        public bool IsKnockedBack => knockbackState == ActionState.Preparing || sprintState == ActionState.Acting || sprintState == ActionState.InAction || knockback;
+        #endregion
+
+
         public void UpdateSlideState()
         {
             var playerRigidbody = player.GetComponent<Rigidbody2D>();
@@ -163,13 +179,13 @@ namespace Platformer.Mechanics
                     if (stopSlide || slideDuration <= 0 || atAWall)
                     {
                         // Stop sliding
-                        
+
                         stopSlide = true;
                         slideState = ActionState.Acted;
                         //move players x position away from the wall slightly.
-     
-                            player.transform.position = new Vector2(player.transform.position.x + (player.spriteRenderer.flipX ? 1 : -1) * 0.25f, player.transform.position.y);
-                    
+
+                        player.transform.position = new Vector2(player.transform.position.x + (player.spriteRenderer.flipX ? 1 : -1) * 0.25f, player.transform.position.y);
+
                     }
                     else if (playerInput != Vector2.zero)
                     {
@@ -267,6 +283,40 @@ namespace Platformer.Mechanics
             }
         }
 
+
+        public void UpdateKnockbackstate()
+        {
+            if (knockback)
+            {
+                switch (knockbackState)
+                {
+                    case ActionState.Ready:
+                        knockbackState = ActionState.Preparing;
+                        break;
+                    case ActionState.Preparing:
+                        knockbackDuration = Constants.DefaultKnockbackDuration;
+                        knockbackState = ActionState.Acting;
+                        break;
+                    case ActionState.Acting:
+                        if (knockbackDuration <= 0 || player.health.currentHP == 0)
+                        {
+                            knockbackState = ActionState.Acted;
+                        }
+                        Vector2 moveAmount = (player.spriteRenderer.flipX ? Vector2.right : Vector2.left) * Constants.DefaultKnockbackSpeed * Time.deltaTime;
+                        player.transform.position += (Vector3)moveAmount;
+                        knockbackDuration -= Time.deltaTime;
+                        break;
+                    case ActionState.InAction:
+                        knockbackState = ActionState.Acted;
+                        break;
+                    case ActionState.Acted:
+                        knockbackState = ActionState.Ready;
+                        knockback = false;
+                        break;
+                }
+            }
+        }
+
         public void HandleWallGrab(Vector2 velocity)
         {
             if (grabState == ActionState.Acting)
@@ -307,7 +357,7 @@ namespace Platformer.Mechanics
         {
             //if player is facing the wall
             if (player.collider2d.IsTouchingLayers(LayerMask.GetMask("Walls")))
-            { 
+            {
                 grabState = ActionState.Acting;
                 player.velocity = -Constants.DefaultGravity * Constants.PercentageOfGravityWhileGrabbing * Time.deltaTime * -Vector2.up;
 
@@ -365,7 +415,6 @@ namespace Platformer.Mechanics
                 stopSlide = false;
             }
         }
-
 
         private void OnMoveRightPerformed(InputAction.CallbackContext context)
         {

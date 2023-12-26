@@ -1,5 +1,5 @@
+using Assets.Scripts;
 using Platformer.Core;
-using Platformer.Mechanics;
 using Platformer.Model;
 
 namespace Platformer.Gameplay
@@ -18,7 +18,7 @@ namespace Platformer.Gameplay
             player.controlEnabled = false;
             if (player.audioSource && player.respawnAudio)
                 player.audioSource.PlayOneShot(player.respawnAudio);
-            player.health.Increment();
+            player.health.Increment(Constants.DefaultMaxHealth);
             player.Teleport(model.spawnPoint.transform.position);
             player.playerActions.jumpState = Assets.Scripts.Mechanics.MechanicEnums.ActionState.Ready;
             player.animator.SetBool("dead", false);

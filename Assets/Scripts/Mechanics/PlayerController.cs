@@ -24,6 +24,7 @@ namespace Platformer.Mechanics
         [SerializeField]
         public InputActionAsset controls;
 
+
         public InputActionAsset Controls
         {
             get { return controls; }
@@ -55,12 +56,6 @@ namespace Platformer.Mechanics
                 StartCoroutine(ResetColliderAfterSlide(enemyCollider));
             }
         }
-
-        public void OnCollisionExit2D(Collision2D collision)
-        {
-
-        }
-
         IEnumerator ResetColliderAfterSlide(CapsuleCollider2D collider)
         {
             yield return new WaitForSeconds(Constants.SlideDuration);
@@ -73,6 +68,7 @@ namespace Platformer.Mechanics
             playerActions.UpdateJumpState(IsGrounded);
             playerActions.UpdateGrabState(velocity);
             playerActions.UpdateSprintState(move, velocity);
+            playerActions.UpdateKnockbackstate();
             playerActions.UpdateSlideState();
             base.Update();
         }
