@@ -50,7 +50,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DotMatrixHologram
-  m_Shader: {fileID: -6465566751694194690, guid: 29fb17a0b7ea5dc4ba3f3ed6ce870838, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 29fb17a0b7ea5dc4ba3f3ed6ce870838,
+    type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
@@ -59,7 +60,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2450
   stringTagMap: {}
   disabledShaderPasses:
   - TransparentDepthPrepass
@@ -147,6 +148,7 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
+    - _UpscalingAmount: 1
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 3

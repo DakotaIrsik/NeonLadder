@@ -13,6 +13,7 @@ namespace Platformer.Mechanics
     public class PlayerActionController : MonoBehaviour
     {
         public MetaGameController meta;
+        public GameObject bulletPrefab;
         private string bindingOutput = string.Empty;
         public PlayerController player;
         public LineRenderer aim;
@@ -81,6 +82,22 @@ namespace Platformer.Mechanics
             var aimAction = playerActionMap.FindAction("Aim");
             aimAction.performed += OnAimPerformed;
 
+
+            var fireAction = playerActionMap.FindAction("Fire");
+            fireAction.performed += OnFireActionPerformed;
+
+        }
+
+        private void OnFireActionPerformed(InputAction.CallbackContext context)
+        {
+            GameObject bulletInstance = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
+            Rigidbody2D bulletRigidbody = bulletInstance.GetComponent<Rigidbody2D>();
+            if (bulletRigidbody != null)
+            {
+                Vector2 fireDirection = currentAimDirection.normalized;
+                float bulletSpeed = 10f; // Adjust this value as needed
+                bulletRigidbody.AddForce(fireDirection * bulletSpeed, ForceMode2D.Impulse);
+            }
         }
 
         private void OnAimPerformed(InputAction.CallbackContext context)
