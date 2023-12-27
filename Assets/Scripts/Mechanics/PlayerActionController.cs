@@ -33,7 +33,7 @@ namespace Platformer.Mechanics
                                                                // Set color and width as desired
             }   aim.startColor = Color.red;
             aim.endColor = Color.red;
-            aim.startWidth = .25f;
+            aim.startWidth = .05f;
             PrintDebugControlConfiguration();
             ConfigureControls();
         }
@@ -105,7 +105,6 @@ namespace Platformer.Mechanics
 
         private void AimWithJoystick(Vector2 joystickDirection)
         {
-            // Your existing code...
             currentAimDirection = new Vector3(joystickDirection.x, joystickDirection.y, 0).normalized;
             isAiming = true;
         }
