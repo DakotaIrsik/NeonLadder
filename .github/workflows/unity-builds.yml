@@ -48,33 +48,24 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}.zip
-      - name: Create and Push Unique Tag
-        id: create_tag # Add an ID to reference this step later
+      - name: Create and Push Tag Using Run Number
+        id: create_tag
         run: |
-            DATE_TAG=$(date +"v%m-%d-%Y")
-            git fetch --tags
-            TAG_COUNT=$(git tag -l "$DATE_TAG*" | wc -l)
-            NEW_TAG="$DATE_TAG-$((TAG_COUNT+1))"
-        
-            while git tag -l | grep -q "$NEW_TAG"; do
-              TAG_COUNT=$((TAG_COUNT+1))
-              NEW_TAG="$DATE_TAG-$TAG_COUNT"
-            done
-        
-            echo "Creating new tag: $NEW_TAG"
-            git config --global user.name 'github-actions'
-            git config --global user.email 'github-actions@github.com'
-            git tag $NEW_TAG
-            git push origin $NEW_TAG
-            echo "::set-output name=tag::$NEW_TAG" # Set the output
+          NEW_TAG="build-${{ github.run_number }}"
+          echo "Creating new tag: $NEW_TAG"
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
+          echo "::set-output name=tag::$NEW_TAG"
       - name: Create Release
-        id: create_release # Add this ID
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.create_tag.outputs.tag }} # Use the output as tag_name
-          release_name: Release for ${{ matrix.targetPlatform }} - ${{ steps.create_tag.outputs.tag }}
+          tag_name: ${{ steps.create_tag.outputs.tag }}
+          release_name: Release ${{ steps.create_tag.outputs.tag }} for ${{ matrix.targetPlatform }}
           draft: false
           prerelease: false
           body: |
