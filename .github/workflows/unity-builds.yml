@@ -50,17 +50,23 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}.zip
-      - name: Create and Push Tag
+      - name: Create and Push Unique Tag
         run: |
-          DATE_TAG=$(date +"v%m-%d-%Y")
-          TAG_COUNT=$(git tag -l "$DATE_TAG*" | wc -l)
-          TAG_COUNT=$((TAG_COUNT+1))
-          NEW_TAG="$DATE_TAG-$TAG_COUNT"
-          echo "Creating new tag: $NEW_TAG"
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git tag $NEW_TAG
-          git push origin $NEW_TAG
+            DATE_TAG=$(date +"v%m-%d-%Y")
+            git fetch --tags
+            TAG_COUNT=$(git tag -l "$DATE_TAG*" | wc -l)
+            NEW_TAG="$DATE_TAG-$((TAG_COUNT+1))"
+        
+            while git tag -l | grep -q "$NEW_TAG"; do
+              TAG_COUNT=$((TAG_COUNT+1))
+              NEW_TAG="$DATE_TAG-$TAG_COUNT"
+            done
+        
+            echo "Creating new tag: $NEW_TAG"
+            git config --global user.name 'github-actions'
+            git config --global user.email 'github-actions@github.com'
+            git tag $NEW_TAG
+            git push origin $NEW_TAG
       - name: Create Release
         uses: actions/create-release@v1
         env:
