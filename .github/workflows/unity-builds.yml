@@ -40,6 +40,8 @@ jobs:
         run: |
           mkdir -p build/
           ls -alh
+      - name: Change Ownership of Build Directory
+        run: sudo chown -R runner:docker build/
       - name: Zip Artifacts
         run: |
           zip -r build/${{ matrix.targetPlatform }}.zip build/${{ matrix.targetPlatform }} || true
