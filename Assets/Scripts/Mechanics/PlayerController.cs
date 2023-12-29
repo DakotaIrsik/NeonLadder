@@ -45,18 +45,9 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
-
-            StartCoroutine(DelayedToggleMainMenu());
         }
 
-        IEnumerator DelayedToggleMainMenu()
-        {
-            // Wait for 3 seconds
-            yield return new WaitForSeconds(3);
 
-            // Toggle main menu after the delay
-            playerActions.meta.ToggleMainMenu(true);
-        }
 
 
         public void OnCollisionEnter2D(Collision2D collision)
