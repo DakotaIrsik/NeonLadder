@@ -1,4 +1,5 @@
 using Platformer.Mechanics.Stats;
+using UnityEngine;
 using static Platformer.Core.Simulation;
 
 namespace Platformer.Gameplay
@@ -14,7 +15,21 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
-            Schedule<PlayerDeath>();
+
+            switch (health.gameObject.tag)
+            {
+                case "Player":
+                    Schedule<PlayerDeath>();
+                    break;
+                case "Enemy":
+                    Schedule<EnemyDeath>();
+                    break;
+                default:
+                    Debug.Log(health.gameObject.tag);
+                    break;
+
+            }
+
         }
     }
 }

@@ -47,6 +47,12 @@
         public const float GrabCooldown = 1f;
         public const float GrabSpeedMultiplier = 1f;
         public const float PercentageOfGravityWhileGrabbing = 0.5f; // example default value, adjust as needed
+
+        public const float MeleeAttackDuration = 0.25f; //one second
+        public const float MeleeAttackScaleX = 0.5f;
+        public const float MeleeAttackScaleY = 0.5f;
+        public const float MeleeAttackScaleZ = 0.5f;
+
         #endregion
     }
 }

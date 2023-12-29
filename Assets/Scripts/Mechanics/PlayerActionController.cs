@@ -1,6 +1,9 @@
 using Assets.Scripts;
 using Platformer.Gameplay;
+using Platformer.Mechanics.Stats;
 using Platformer.UI;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,6 +21,7 @@ namespace Platformer.Mechanics
         public PlayerController player;
         public LineRenderer aim;
         public AudioClip jumpAudio;
+        public MeleeAttack meleePrefab;
         private Vector2 playerInput;
         private float sprintTimeAccumulator = 0f;
         private Vector3 currentAimDirection;
@@ -35,6 +39,11 @@ namespace Platformer.Mechanics
             }   aim.startColor = Color.red;
             aim.endColor = Color.red;
             aim.startWidth = .05f;
+
+            meleeAttackInstance = Instantiate(meleePrefab);
+            meleeAttackInstance.gameObject.SetActive(false); // Start with the attack deactivated.
+
+
             PrintDebugControlConfiguration();
             ConfigureControls();
         }
@@ -86,7 +95,101 @@ namespace Platformer.Mechanics
             var fireAction = playerActionMap.FindAction("Fire");
             fireAction.performed += OnFireActionPerformed;
 
+            var meleeAction = playerActionMap.FindAction("MeleeAttack");
+            meleeAction.performed += OnMeleeActionPerformed;
+
         }
+
+
+        void OnDrawGizmos()
+        {
+            if (meleeAttackInstance != null && meleeAttackInstance.gameObject.activeInHierarchy)
+            {
+                PolygonCollider2D polygon = meleeAttackInstance.GetComponentInChildren<PolygonCollider2D>();
+                if (polygon != null)
+                {
+                    Gizmos.color = Color.green;
+                    Transform transform = polygon.transform;
+
+                    if (polygon.points.Length > 0)
+                    {
+                        Vector2 firstPoint = transform.TransformPoint(polygon.points[0]);
+                        Vector2 previousPoint = firstPoint;
+
+                        for (int i = 1; i < polygon.points.Length; i++)
+                        {
+                            Vector2 currentPoint = transform.TransformPoint(polygon.points[i]);
+                            Gizmos.DrawLine(previousPoint, currentPoint);
+                            previousPoint = currentPoint;
+                        }
+
+                        Gizmos.DrawLine(previousPoint, firstPoint);
+                    }
+                }
+            }
+        }
+
+
+
+
+        private MeleeAttack meleeAttackInstance;
+
+        private float distanceFromPlayer = 1f;
+
+        private void OnMeleeActionPerformed(InputAction.CallbackContext context)
+        {
+            if (isMeleeAttacking) return;
+
+            isMeleeAttacking = true;
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            Vector2 playerBounds = playerCollider.bounds.extents;
+            Vector2 playerPosition = playerCollider.bounds.center;
+
+            float horizontalOffset = (player.spriteRenderer.flipX ? -1 : 1) * (playerBounds.x + distanceFromPlayer);
+
+            Vector2 startPosition = new Vector2(
+                playerPosition.x + horizontalOffset,
+                playerPosition.y + playerBounds.y / 2
+            );
+
+            meleeAttackInstance.transform.position = startPosition;
+            meleeAttackInstance.transform.localScale = new Vector3(
+                Constants.MeleeAttackScaleX * (player.spriteRenderer.flipX ? 1 : -1),
+                Constants.MeleeAttackScaleY,
+                Constants.MeleeAttackScaleZ
+            );
+
+            meleeAttackInstance.gameObject.SetActive(true);
+
+            // Get the collider from the child "Sprite" GameObject
+            PolygonCollider2D childCollider = meleeAttackInstance.GetComponentInChildren<PolygonCollider2D>();
+            if (childCollider != null)
+            {
+                childCollider.enabled = true;
+            }
+            else
+            {
+                Debug.LogError("No PolygonCollider2D found on the child 'Sprite' GameObject of MeleeAttackInstance.");
+            }
+
+            StartCoroutine(DisableAfterDelay(meleeAttackInstance, Constants.MeleeAttackDuration));
+        }
+
+
+
+        private IEnumerator DisableAfterDelay(MeleeAttack attackObject, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            // Deactivate the parent GameObject to ensure the entire attack is disabled
+            attackObject.gameObject.SetActive(false);
+
+            // Reset the attack flag
+            isMeleeAttacking = false;
+        }
+
+
+
 
         private void OnFireActionPerformed(InputAction.CallbackContext context)
         {
@@ -104,8 +207,8 @@ namespace Platformer.Mechanics
         {
             Vector2 aimDirection = context.ReadValue<Vector2>();
 
-            Debug.Log(string.Join(",", context.control.device.aliases.Select(a => a)));
-            Debug.Log(context.control.device.name);
+            //Debug.Log(string.Join(",", context.control.device.aliases.Select(a => a)));
+            //Debug.Log(context.control.device.name);
 
 
             if(context.control.device is Mouse)
@@ -238,6 +341,11 @@ namespace Platformer.Mechanics
         public ActionState knockbackState = ActionState.Ready;
         public bool IsKnockedBack => knockbackState == ActionState.Preparing || sprintState == ActionState.Acting || sprintState == ActionState.InAction || knockback;
         #endregion
+
+        #region Melee
+        private bool isMeleeAttacking = false;
+        #endregion
+
 
         private void Update()
         {

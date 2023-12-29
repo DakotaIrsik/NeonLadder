@@ -10,7 +10,7 @@ namespace Platformer.Mechanics.Stats
 
         new void Awake()
         {
-            max = Constants.MaxHealth; 
+            //max = Constants.MaxHealth; 
             base.Awake(); 
         }
 

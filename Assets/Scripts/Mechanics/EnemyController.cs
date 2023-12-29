@@ -1,4 +1,5 @@
 ﻿using Platformer.Gameplay;
+using Platformer.Mechanics.Stats;
 using UnityEngine;
 using static Platformer.Core.Simulation;
 
@@ -12,7 +13,7 @@ namespace Platformer.Mechanics
     {
         public PatrolPath path;
         public AudioClip ouch;
-
+        public Health health;
         internal PatrolPath.Mover mover;
         internal AnimationController control;
         internal Collider2D _collider;
@@ -31,12 +32,28 @@ namespace Platformer.Mechanics
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            var player = collision.gameObject.GetComponent<PlayerController>();
-            if (player != null)
+            switch (collision.gameObject.tag)
             {
-                var ev = Schedule<PlayerEnemyCollision>();
-                ev.player = player;
-                ev.enemy = this;
+                case "Player":
+                    var player = collision.gameObject.GetComponent<PlayerController>();
+                    if (player != null)
+                    {
+                        var ev = Schedule<PlayerEnemyCollision>();
+                        ev.player = player;
+                        ev.enemy = this;
+                    }
+                    break;
+                case "Melee":
+                    var melee = collision.gameObject.GetComponent<MeleeAttack>();
+                    if (melee != null)
+                    {
+                        var ev = Schedule<MeleeEnemyCollision>();
+                        ev.melee = melee;
+                        ev.enemy = this;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
