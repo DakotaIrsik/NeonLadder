@@ -1,7 +1,5 @@
-name: Build project
-
+name: Build and Release project
 on: [push, pull_request]
-
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
@@ -10,13 +8,13 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          - StandaloneWindows # Build a Windows standalone.
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
-          - iOS # Build an iOS player.
-          - Android # Build an Android .apk standalone app.
-          - WebGL # WebGL.
+          - StandaloneOSX
+          - StandaloneWindows
+          - StandaloneWindows64
+          - StandaloneLinux64
+          - iOS
+          - Android
+          - WebGL
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,10 +29,62 @@ jobs:
         uses: jlumbroso/free-disk-space@v1.3.1
       - uses: game-ci/unity-builder@v4
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
+      - name: Prepare Directory for Zipping
+        run: |
+          mkdir -p build/
+          ls -alh
+      - name: Change Ownership of Build Directory
+        run: sudo chown -R runner:docker build/
+      - name: Zip Artifacts
+        run: |
+          zip -r build/${{ matrix.targetPlatform }}.zip build/${{ matrix.targetPlatform }} || true
+          ls -alh build/
       - uses: actions/upload-artifact@v3
         with:
           name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}.zip
+      - name: Create and Push Unique Tag
+        id: create_tag # Add an ID to reference this step later
+        run: |
+            DATE_TAG=$(date +"v%m-%d-%Y")
+            git fetch --tags
+            TAG_COUNT=$(git tag -l "$DATE_TAG*" | wc -l)
+            NEW_TAG="$DATE_TAG-$((TAG_COUNT+1))"
+        
+            while git tag -l | grep -q "$NEW_TAG"; do
+              TAG_COUNT=$((TAG_COUNT+1))
+              NEW_TAG="$DATE_TAG-$TAG_COUNT"
+            done
+        
+            echo "Creating new tag: $NEW_TAG"
+            git config --global user.name 'github-actions'
+            git config --global user.email 'github-actions@github.com'
+            git tag $NEW_TAG
+            git push origin $NEW_TAG
+            echo "::set-output name=tag::$NEW_TAG" # Set the output
+      - name: Create Release
+        id: create_release # Add this ID
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.create_tag.outputs.tag }} # Use the output as tag_name
+          release_name: Release for ${{ matrix.targetPlatform }} - ${{ steps.create_tag.outputs.tag }}
+          draft: false
+          prerelease: false
+          body: |
+            Release of ${{ matrix.targetPlatform }}
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # Now correctly references the output
+          asset_path: ./build/${{ matrix.targetPlatform }}.zip
+          asset_name: ${{ matrix.targetPlatform }}.zip
+          asset_content_type: application/zip

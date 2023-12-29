@@ -1,8 +1,17 @@
-# UnityGame
+# Neon Ladder
+# https://play.unity.com/mg/2d/webgl-builds-383063
+![image](https://github.com/DakotaIrsik/NeonLadder/assets/26256978/30bc6779-7c0b-4264-b300-81a9f7194827)
 
-https://play.unity.com/mg/2d/webgl-builds-383063
 
-##Open Unity Editor and add Scene (Unity 2021 (for now))
+Source code local compilation (requires [Unity 2021.3.33f1](https://download.unity3d.com/download_unity/ee5a2aa03ab2/Windows64EditorInstaller/UnitySetup64-2021.3.33f1.exe))
+Alternatively visit the [RELEASE](https://github.com/DakotaIrsik/NeonLadder/releases) page for OS specifix fully execuable games for:
+Linux
+Windows
+Android
+iOS
+MacOS
+
+Please openly add an issue, or add even suggestions to github issues!
 
 ## On Windows (tested)
 ```
