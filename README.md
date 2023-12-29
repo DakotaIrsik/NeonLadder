@@ -7,6 +7,8 @@ https://play.unity.com/mg/2d/webgl-builds-383063
 
 ##Open Unity Editor and add Scene (Unity 2021 (for now))
 
+
+Source code local compilation (requires  <href="https://download.unity3d.com/download_unity/ee5a2aa03ab2/Windows64EditorInstaller/UnitySetup64-2021.3.33f1.exe">Unity 2021.3.33f1</a>
 ## On Windows (tested)
 ```
 build_windows_on_windows.bat
