@@ -8,7 +8,17 @@ https://play.unity.com/mg/2d/webgl-builds-383063
 ##Open Unity Editor and add Scene (Unity 2021 (for now))
 
 
-Source code local compilation (requires  <href="https://download.unity3d.com/download_unity/ee5a2aa03ab2/Windows64EditorInstaller/UnitySetup64-2021.3.33f1.exe">Unity 2021.3.33f1</a>
+[Unity 2021.3.33f1](https://download.unity3d.com/download_unity/ee5a2aa03ab2/Windows64EditorInstaller/UnitySetup64-2021.3.33f1.exe)
+Source code local compilation (requires [Unity 2021.3.33f1](https://download.unity3d.com/download_unity/ee5a2aa03ab2/Windows64EditorInstaller/UnitySetup64-2021.3.33f1.exe))
+Alternatively visit the [RELEASE](https://github.com/DakotaIrsik/NeonLadder/releases) page for OS specifix fully execuable games for:
+Linux
+Windows
+Android
+iOS
+MacOS
+
+Please openly add an issue, or add even suggestions to github issues!
+
 ## On Windows (tested)
 ```
 build_windows_on_windows.bat
