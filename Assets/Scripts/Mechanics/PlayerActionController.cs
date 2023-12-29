@@ -27,6 +27,7 @@ namespace Platformer.Mechanics
         private Vector3 currentAimDirection;
         private bool isAiming = false;
         private float aimDistance = 5f;
+        private int currentBulletsOnScreen = 0;
 
         private void Start()
         {
@@ -176,7 +177,6 @@ namespace Platformer.Mechanics
         }
 
 
-
         private IEnumerator DisableAfterDelay(MeleeAttack attackObject, float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -189,36 +189,43 @@ namespace Platformer.Mechanics
         }
 
 
-
-
         private void OnFireActionPerformed(InputAction.CallbackContext context)
         {
+            if (player.stamina.IsExhausted || currentBulletsOnScreen >= Constants.RangedAttackMaxOnScreen) return;
+            player.stamina.Decrement(Constants.RangedAttackStaminaCost); // Decrement stamina
             GameObject bulletInstance = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
+
+            // Increment the bullet count
+            currentBulletsOnScreen++;
+
+            // Automatically destroy the bullet after its lifetime and decrement the bullet count
+            Destroy(bulletInstance, Constants.RangedAttackLifeTime);
+            StartCoroutine(DecrementBulletCountAfterDelay(Constants.RangedAttackLifeTime));
+
             Rigidbody2D bulletRigidbody = bulletInstance.GetComponent<Rigidbody2D>();
             if (bulletRigidbody != null)
             {
                 Vector2 fireDirection = currentAimDirection.normalized;
-                float bulletSpeed = 10f; // Adjust this value as needed
-                bulletRigidbody.AddForce(fireDirection * bulletSpeed, ForceMode2D.Impulse);
+                bulletRigidbody.AddForce(fireDirection * Constants.RangedAttackSpeed, ForceMode2D.Impulse);
             }
         }
+
+        private IEnumerator DecrementBulletCountAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            currentBulletsOnScreen--;
+        }
+
 
         private void OnAimPerformed(InputAction.CallbackContext context)
         {
             Vector2 aimDirection = context.ReadValue<Vector2>();
-
-            //Debug.Log(string.Join(",", context.control.device.aliases.Select(a => a)));
-            //Debug.Log(context.control.device.name);
-
-
             if(context.control.device is Mouse)
             {
-                // Convert mouse position to world direction
                 AimWithMouse();
             }
             else
             {
-                // Convert joystick input to world direction
                 AimWithJoystick(aimDirection);
             }
         }
@@ -249,7 +256,6 @@ namespace Platformer.Mechanics
             {
                 var actionBindings = new Dictionary<string, List<string>>();
 
-                // Iterate through each action and collect its bindings
                 foreach (var action in player.Controls.FindActionMap("Player").actions)
                 {
                     foreach (var binding in action.bindings)
@@ -257,10 +263,8 @@ namespace Platformer.Mechanics
                         string deviceName = FormatDeviceName(binding.path.Split('/')[0].Replace("<", "").Replace(">", "")); // Extract and format device name
                         string controlName = binding.path.Split('/').Last();
 
-                        // Format the binding string
                         string formattedBinding = $"{controlName} ({deviceName})";
 
-                        // Add to the dictionary
                         if (!actionBindings.ContainsKey(action.name))
                         {
                             actionBindings[action.name] = new List<string>();
@@ -268,8 +272,6 @@ namespace Platformer.Mechanics
                         actionBindings[action.name].Add(formattedBinding);
                     }
                 }
-
-                // Format the final output
                 var fullBindings = new List<string>();
                 foreach (var actionBinding in actionBindings)
                 {
@@ -349,9 +351,6 @@ namespace Platformer.Mechanics
 
         private void Update()
         {
-            // Other update code...
-
-            // Update the aim line if the player is aiming
             if (isAiming) // You need a variable to track whether the player is currently aiming
             {
                 UpdateAimLine();
@@ -424,9 +423,9 @@ namespace Platformer.Mechanics
             }
         }
 
-
         public void UpdateSprintState(Vector2 move, Vector2 velocity)
         {
+            float staminaCostPerTenthSecond = Constants.SprintStaminaCost * 0.1f;
             switch (sprintState)
             {
                 case ActionState.Preparing:
@@ -445,16 +444,15 @@ namespace Platformer.Mechanics
                     else
                     {
                         sprintTimeAccumulator += Time.deltaTime;
-                        //Debug.Log(sprintTimeAccumulator);
-                        if (sprintTimeAccumulator >= 1f)
+                        if (sprintTimeAccumulator >= 0.1f)
                         {
-                            player.stamina.Decrement(1); // Decrement stamina
-                            sprintTimeAccumulator -= 1f; // Subtract one second from the accumulator
+                            player.stamina.Decrement(staminaCostPerTenthSecond); // Decrement stamina
+                            sprintTimeAccumulator -= 0.1f; // Subtract 0.1 seconds from the accumulator
                         }
 
                         if (Mathf.Abs(move.x) > 0)
                         {
-                            velocity.x = Mathf.Sign(move.x) * sprintSpeed;
+                            velocity.x = Mathf.Sign(move.x) * Constants.MaxSpeed;
                         }
                         sprintDuration -= Time.deltaTime;
                     }
@@ -467,6 +465,8 @@ namespace Platformer.Mechanics
                     break;
             }
         }
+
+
 
         public void UpdateJumpState(bool IsGrounded)
         {
@@ -497,7 +497,6 @@ namespace Platformer.Mechanics
                     break;
             }
         }
-
 
         public void UpdateKnockbackstate()
         {
@@ -565,11 +564,15 @@ namespace Platformer.Mechanics
 
         private void OnCrouchPerformed(InputAction.CallbackContext context)
         {
+            if (player.stamina.IsExhausted) return;
+            player.stamina.Decrement(Constants.CrouchStaminaCost);
             player.transform.localScale = new Vector3(Constants.CrouchScale, Constants.CrouchScale, 1);
         }
 
         private void OnGrabPerformed(InputAction.CallbackContext context)
         {
+            if (player.stamina.IsExhausted) return;
+            player.stamina.Decrement(Constants.GrabStaminaCost);    
             //if player is facing the wall
             if (player.collider2d.IsTouchingLayers(LayerMask.GetMask("Walls")))
             {
@@ -609,6 +612,8 @@ namespace Platformer.Mechanics
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
+            if (player.stamina.IsExhausted) return;
+            player.stamina.Decrement(Constants.JumpStaminaCost);
             if (jumpState == ActionState.Ready || (grabState == ActionState.Acting && player.collider2d.IsTouchingLayers(LayerMask.GetMask("Level"))))
             {
                 jumpState = ActionState.Preparing;
@@ -627,6 +632,8 @@ namespace Platformer.Mechanics
 
         private void OnSlidePerformed(InputAction.CallbackContext context)
         {
+            if (player.stamina.IsExhausted) return;
+            player.stamina.Decrement(Constants.SlideStaminaCost);
             if (slideState == ActionState.Ready)
             {
                 slideState = ActionState.Preparing;

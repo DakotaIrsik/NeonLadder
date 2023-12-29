@@ -5,16 +5,16 @@ namespace Platformer.Mechanics.Stats
     public abstract class BaseStat : MonoBehaviour
     {
         [SerializeField]
-        public int current;
-        public int max = 100;
+        public float current;
+        public float max = 100;
         public bool IsDepleted => current == 0;
 
-        public void Increment(int amount = 1)
+        public void Increment(float amount = 1)
         {
             current = Mathf.Clamp(current + amount, 0, max);
         }
 
-        public void Decrement(int amount = 1)
+        public void Decrement(float amount = 1)
         {
             current = Mathf.Clamp(current - amount, 0, max);
             if (current == 0)

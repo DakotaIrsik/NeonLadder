@@ -16,6 +16,6 @@ public class PlayerStaminaUIManager : MonoBehaviour
 
     private void Update()
     {
-        StaminaCounterTest.text = $"Stamina {playerStamina.current}/{playerStamina.max}";
+        StaminaCounterTest.text = $"Stamina {playerStamina.current.ToString("F1")}/{playerStamina.max.ToString("F1")}";
     }
 }

@@ -47,9 +47,6 @@ namespace Platformer.Mechanics
             animator = GetComponent<Animator>();
         }
 
-
-
-
         public void OnCollisionEnter2D(Collision2D collision)
         {
             //Debug.Log("Collision detected with name: " + collision.collider.name + "\n Collision detected with tag: " + collision.collider.tag);
@@ -82,12 +79,13 @@ namespace Platformer.Mechanics
         private void RegenerateStamina()
         {
             staminaRegenTimer += Time.deltaTime;
-            if (staminaRegenTimer >= Constants.StaminaRegenRate)
+            if (staminaRegenTimer >= 0.1f) // Check if 1/10th of a second has passed
             {
-                stamina.Increment(1); // Increment stamina by 1 (or your desired amount)
-                staminaRegenTimer = 0f; // Reset the timer
+                stamina.Increment(0.1f); // Increment stamina by 1/10th of a unit
+                staminaRegenTimer -= 0.1f; // Decrease the timer by 0.1f instead of resetting to 0
             }
         }
+
 
         private void HandleInput()
         {
