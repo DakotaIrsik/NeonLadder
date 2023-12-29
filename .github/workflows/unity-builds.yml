@@ -1,7 +1,5 @@
 name: Build and Release project
-
 on: [push, pull_request]
-
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
@@ -51,6 +49,7 @@ jobs:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}.zip
       - name: Create and Push Unique Tag
+        id: create_tag # Add an ID to reference this step later
         run: |
             DATE_TAG=$(date +"v%m-%d-%Y")
             git fetch --tags
@@ -67,13 +66,15 @@ jobs:
             git config --global user.email 'github-actions@github.com'
             git tag $NEW_TAG
             git push origin $NEW_TAG
+            echo "::set-output name=tag::$NEW_TAG" # Set the output
       - name: Create Release
+        id: create_release # Add this ID
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: $NEW_TAG
-          release_name: Release for ${{ matrix.targetPlatform }} - $NEW_TAG
+          tag_name: ${{ steps.create_tag.outputs.tag }} # Use the output as tag_name
+          release_name: Release for ${{ matrix.targetPlatform }} - ${{ steps.create_tag.outputs.tag }}
           draft: false
           prerelease: false
           body: |
@@ -83,7 +84,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # Now correctly references the output
           asset_path: ./build/${{ matrix.targetPlatform }}.zip
           asset_name: ${{ matrix.targetPlatform }}.zip
           asset_content_type: application/zip
+
