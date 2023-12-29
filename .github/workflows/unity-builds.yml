@@ -36,9 +36,14 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
+      - name: Prepare Directory for Zipping
+        run: |
+          mkdir -p build/
+          ls -alh
       - name: Zip Artifacts
         run: |
-          zip -r build/${{ matrix.targetPlatform }}.zip build/${{ matrix.targetPlatform }}
+          zip -r build/${{ matrix.targetPlatform }}.zip build/${{ matrix.targetPlatform }} || true
+          ls -alh build/
       - uses: actions/upload-artifact@v3
         with:
           name: Build-${{ matrix.targetPlatform }}
