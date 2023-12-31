@@ -3,20 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - TutorialRequirement
-  - PowerUp
-  - Wall
-  - Melee
-  - Enemy
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Rolling Layer
+  - 
   - Water
   - UI
-  - Walls
+  - 
   - 
   - 
   - 

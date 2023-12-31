@@ -6,10 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Francesca.unity
+    guid: 895889cbc95d5e64d925443ede4d0527
   m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 1c4bbf4bad413d3448663fa2f4f321e2,
-      type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 434e9745415622948b32f31025eb867d,
-      type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: b1e40208001811b438022357f0762b56, type: 2}

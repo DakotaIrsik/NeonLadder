@@ -1,0 +1,2623 @@
+fileFormatVersion: 2
+guid: 1ca1715361b28884c9c683729b73bf9a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: All Neon lights_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 1806
+        width: 131
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c11797594a3c66a428febaa6a6d32220
+      internalID: -878168888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_1
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 1791
+        width: 146
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feb30c153ea9df64ba7eb4d8b6e50a81
+      internalID: -1817033980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_2
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 1782
+        width: 123
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffb5ee6fccba0b949808293282ec9c66
+      internalID: -585195686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_6
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1785
+        width: 185
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 486e5a053b5710a4f8795c4af03fec29
+      internalID: -2020382901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_7
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 1782
+        width: 168
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2657ed2cae85e949a65ff9f9a0a9e8b
+      internalID: 873730335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_8
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 1815
+        width: 139
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25571ccc333e46f4f8aeba06b270ff36
+      internalID: 48757481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_9
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 1796
+        width: 154
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c256a42579cfba247817990936025492
+      internalID: -1250748437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_12
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 1783
+        width: 146
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2247cce2913edbb4e8d26a25d9273cf1
+      internalID: -1842020952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_14
+      rect:
+        serializedVersion: 2
+        x: 1630
+        y: 1793
+        width: 136
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90a2166d3fd8e7e4c81de8bc8827cb77
+      internalID: -1726421934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_24
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 1788
+        width: 153
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39c066f2c1bbee242b6d691999d76829
+      internalID: 548661536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_26
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1538
+        width: 183
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0109a93e368e8374db71ca857046cc21
+      internalID: 1893056293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_27
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 1541
+        width: 151
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ab1f89b6d9f639439f9e8d0b51a09a6
+      internalID: 1492158823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_28
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 1533
+        width: 194
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce6daa625cf2bdd4a9995e6798cafc17
+      internalID: 809554170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_29
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 1548
+        width: 155
+        height: 209
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d92bc3bffe50fa246abe18c2ceb637e6
+      internalID: 1448357428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_35
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1594
+        width: 202
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa8895146375e1843bfaf62d2a776c44
+      internalID: 1024444649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_36
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 1589
+        width: 165
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11cdd5cfb4b61c84a84421ace44521e8
+      internalID: 774905034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_37
+      rect:
+        serializedVersion: 2
+        x: 1844
+        y: 1595
+        width: 142
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ef168521af45ff468d19a167b7cbe8d
+      internalID: -456478596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_38
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 1565
+        width: 166
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fecfd4399e356514483d5397d8dcd361
+      internalID: -1747175165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_60
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 1588
+        width: 168
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2510173ee253c8a439fb40e94a1c1ce4
+      internalID: 779683679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_73
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1397
+        width: 143
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71d1a27b8bd96d84ca4b528c6c28427f
+      internalID: 400218969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_75
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 1475
+        width: 75
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c10e87956a158fc4a8fd3418e7fbecdb
+      internalID: -698546858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_76
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1394
+        width: 36
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 598797b0d817a22488349e96788d8180
+      internalID: 1435400083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_77
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 1391
+        width: 133
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d2094d42062574aaace9e715cef4c2
+      internalID: 281782414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_78
+      rect:
+        serializedVersion: 2
+        x: 1608
+        y: 1395
+        width: 206
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ad564878cd969498802374e31aa955
+      internalID: -684728106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_79
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 1378
+        width: 158
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8a502024ff48aa4d8bf47d5d610d1c8
+      internalID: -162114999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1308
+        width: 181
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d82215292fb768e45b05f16ef9db8f3c
+      internalID: -1461364163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_82
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 1289
+        width: 148
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3a36d78f4da94242a2a920d5bc330ce
+      internalID: 120462371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_83
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 1286
+        width: 180
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174ed24c544a2974389cd3caa123172c
+      internalID: -1255485883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_84
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 1299
+        width: 179
+        height: 210
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f19664abf7f926d47a2f0a69b7d33850
+      internalID: -425336860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_85
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 1435
+        width: 194
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a58ef322fc9e1c64d9f1e93ad39c4157
+      internalID: 1549942377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_89
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 1405
+        width: 66
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96d29da1fa805184aa80c7f3778c0071
+      internalID: -1537077297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_90
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 1393
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 530da3ce85e0c7541bc5d368368267dd
+      internalID: 564813175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_92
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 1300
+        width: 180
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd007523956b1204bb0a2b4fb231231b
+      internalID: 987525018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_104
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 1222
+        width: 179
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 281c3df1d9a374d4b8e04114ce349225
+      internalID: -333092868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_105
+      rect:
+        serializedVersion: 2
+        x: 1622
+        y: 1208
+        width: 189
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f27b0c4d187e7934083f732fab672e97
+      internalID: 470897544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_106
+      rect:
+        serializedVersion: 2
+        x: 1834
+        y: 1223
+        width: 152
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4565f96608f08564c85652b31aec942f
+      internalID: -1946989639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_110
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 1215
+        width: 171
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d55f91bfbfe955f4d9c4c940bcef97c9
+      internalID: -776062000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_111
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 1236
+        width: 142
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95d691444b8459e44a5b4aed545ddd0d
+      internalID: -1701883456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_115
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1019
+        width: 152
+        height: 253
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c79c8888a96540a4a88531a8995faa83
+      internalID: 182137309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_121
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1158
+        width: 163
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07c143475a8d3a84c8b6cc90c99015fe
+      internalID: 430863205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_122
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 1021
+        width: 87
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1c7592ace79e7941806dd67d33a20f4
+      internalID: 590113338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_128
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 1025
+        width: 142
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d30bfb036ffc70443834aabd505ff864
+      internalID: -37069019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_129
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 1028
+        width: 198
+        height: 189
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92dcceb56ad9f0b40aa5726c7d72ac41
+      internalID: -2023781860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_136
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1026
+        width: 186
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c0b2e415d4fb5e4fbfb8543e812a32d
+      internalID: 1695031473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_137
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 1035
+        width: 155
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac36f7aacd945d4784366f17433bfd0
+      internalID: -27732149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_138
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 1029
+        width: 165
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65afd50150802e4f93cd513d49b27e4
+      internalID: -1399803739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_139
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 1032
+        width: 43
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a94c17fb09cfbd847936f1f9e8ff22a8
+      internalID: 454360935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_140
+      rect:
+        serializedVersion: 2
+        x: 1461
+        y: 1040
+        width: 97
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2d3ec8a16720af43a3415ab55a53a52
+      internalID: -5593084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_141
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 1042
+        width: 42
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aa24be54d8c3784e84446c2283ca44f
+      internalID: -2109434290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_142
+      rect:
+        serializedVersion: 2
+        x: 1639
+        y: 1034
+        width: 156
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 372430d007a8d4f48ab6443033671c7a
+      internalID: -256916988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_144
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 1035
+        width: 148
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fda450f752f8b34fb929d626bcf0452
+      internalID: 1904037775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_147
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 786
+        width: 152
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea4ea7186638d924d9569980c4f2b172
+      internalID: -2101599419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_148
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 796
+        width: 114
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32161c4582dc0ef458982e8750f9062f
+      internalID: 961236843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_151
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 802
+        width: 149
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d1cf5ad9fe8e3242a7c0d27ec691611
+      internalID: 572134981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_152
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 798
+        width: 118
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35b380349a8feb24c803caea14325ad3
+      internalID: -39495741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_153
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 795
+        width: 144
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 933eb184de9faf145b97ffcdbf42bf9c
+      internalID: -916467262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_154
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 725
+        width: 156
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 670e9d5f3837c96439ead036f6fa26eb
+      internalID: 1855545773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_155
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 735
+        width: 139
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f57795571bb92245bf62683483fb4ec
+      internalID: 149549924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_156
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 730
+        width: 178
+        height: 213
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f867e545f29c5d24aac6b440c48c18b4
+      internalID: -957101038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_157
+      rect:
+        serializedVersion: 2
+        x: 1534
+        y: 743
+        width: 124
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf31570bc2ae80d4fa6d2fae389b11c6
+      internalID: 1696360576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_158
+      rect:
+        serializedVersion: 2
+        x: 1695
+        y: 737
+        width: 111
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39988a9025a091c4cb2f34c8637b4344
+      internalID: -2010408945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_159
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 730
+        width: 153
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b749443453d2f842a6e4cc1c058c9e7
+      internalID: -197351125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_163
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 791
+        width: 151
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cef29d79cf7a76e468e6f6c98a519e75
+      internalID: -2029230746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_167
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 601
+        width: 122
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61f69cf71be68044eae7cfd4b4aa9bf9
+      internalID: 1845974946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_168
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 595
+        width: 102
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24520f4382f471f4c979f5949f9aa196
+      internalID: 627007911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_169
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 582
+        width: 95
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99fda92fa8d9f7d43bdf4475df814e5a
+      internalID: -1752534259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_170
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 597
+        width: 121
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c910ec52740005d409641dbe5690af6b
+      internalID: -540822442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_171
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 593
+        width: 100
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7064ddf22335f449b5f8b10adc2fedc
+      internalID: -979701222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_172
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 607
+        width: 145
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaf3d96040b95c841838ab023085153b
+      internalID: -261282388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_173
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 489
+        width: 161
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19bc749191fe00747be9e1e681988f94
+      internalID: 693808639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_174
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 477
+        width: 165
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd725bdc5102ab6469185cfa3f484303
+      internalID: -1687328137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_175
+      rect:
+        serializedVersion: 2
+        x: 1369
+        y: 482
+        width: 125
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bffc53dc6ac1d294fbed76bc35f2001a
+      internalID: -1025521183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_176
+      rect:
+        serializedVersion: 2
+        x: 1516
+        y: 494
+        width: 158
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47f27491317b3824aadd267f42e8cb19
+      internalID: -916080503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_177
+      rect:
+        serializedVersion: 2
+        x: 1682
+        y: 484
+        width: 149
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea4ccd52c0756804087affbaebcd4e63
+      internalID: -2133700140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_178
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 502
+        width: 142
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c08bc7175f7e144cb5e83558289ad05
+      internalID: 1841302423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_179
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 408
+        width: 112
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75347b490dd43dd41937981bb5403eed
+      internalID: 703552845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_180
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 414
+        width: 104
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05997e6fda49c9e47a4d82beacb464c2
+      internalID: 603171692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_181
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 404
+        width: 153
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0c043afc0580de44891f171636094eb
+      internalID: 180909554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_182
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 413
+        width: 106
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35f467bf80b3e548b2dbdce7bf8a9e4
+      internalID: 726569945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_183
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 419
+        width: 122
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea7ed54c951bf884285b0c2fba32e8af
+      internalID: -1258025882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_184
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 400
+        width: 136
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46304c5d00864f143a8e247f6bcce20a
+      internalID: 2099370829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_187
+      rect:
+        serializedVersion: 2
+        x: 1014
+        y: 258
+        width: 162
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97390e6461e9ea64b952afc7913e226c
+      internalID: -1337059963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_188
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 268
+        width: 141
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 242c47a614cd26047b3bea2e90167088
+      internalID: 993685057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_189
+      rect:
+        serializedVersion: 2
+        x: 1362
+        y: 253
+        width: 137
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8f5b4079e170834f81b371929f4c9c6
+      internalID: -177484812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_190
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 255
+        width: 152
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4de638467168fd94db3850a8c3ac1c69
+      internalID: 1659447358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_191
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 260
+        width: 133
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bac84a7461fc1c2428ee680acc64d00b
+      internalID: 4156663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_192
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 261
+        width: 146
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e58e6f9ccd966c04c8d5acb8bf1a33a8
+      internalID: 1407285437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_193
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 225
+        width: 142
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91df4a34e813e914e92740c6e71d56d4
+      internalID: 1005890915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_195
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 236
+        width: 133
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09b64b1a535e0646bb8d331e5cbf888
+      internalID: 879259657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_196
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 210
+        width: 99
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06d5bb0cd976c1040b017b41965e6409
+      internalID: 1646009532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_198
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 220
+        width: 123
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab3f19fbfc1b4044995900aefa70e40
+      internalID: 115794073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_200
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 233
+        width: 145
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0ee7bda36841854ca8a9ea5fe304c9f
+      internalID: -82755713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_201
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 214
+        width: 140
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 664d7cc741eef1446884232cb3220574
+      internalID: -2049872161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_204
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 0
+        width: 141
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87ab3c1cc40ed2446b6496e8dd8e590c
+      internalID: 1598343063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_205
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 16
+        width: 154
+        height: 203
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 408493ddd83ef5443827508413a07fd0
+      internalID: -60717793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_206
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 16
+        width: 141
+        height: 205
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bca853e19517904408ed674fca69bb5d
+      internalID: -1550883030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_207
+      rect:
+        serializedVersion: 2
+        x: 1685
+        y: 7
+        width: 137
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 890d6a50ab229d74ab87f2ef1d22706d
+      internalID: 1845529329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_208
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 7
+        width: 128
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42aae5c705bf44b46811d9a11f51506f
+      internalID: 1060138363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_209
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 9
+        width: 106
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdbaab5c09c30e34d8855a541dac24e4
+      internalID: -1334990169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_210
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 8
+        width: 114
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 242c0117639bca1448d1ab59962373f7
+      internalID: 1259450353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_211
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 12
+        width: 114
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0efa6c2b0e7ee5541b430a2445115041
+      internalID: -1847021655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_212
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 14
+        width: 127
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b9c540e96c0c96429b82895990d5166
+      internalID: 363343112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_213
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 0
+        width: 129
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9214f5b4e1dcd604d8310c3d1553bee2
+      internalID: -1383761077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_214
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 18
+        width: 145
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3c34014dabd13f45824a6784d7f34f2
+      internalID: 1494527347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_215
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 20
+        width: 141
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38804a2f710132f49aa5efa8084a7be3
+      internalID: 1147517701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Neon lights_30
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 1581
+        width: 144
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d48ec82d841129a49a1087e254715af8
+      internalID: -462838799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      All Neon lights_0: -878168888
+      All Neon lights_1: -1817033980
+      All Neon lights_10: 1658804602
+      All Neon lights_100: 48020840
+      All Neon lights_101: 1149055230
+      All Neon lights_102: 582430059
+      All Neon lights_103: -801400465
+      All Neon lights_104: -333092868
+      All Neon lights_105: 470897544
+      All Neon lights_106: -1946989639
+      All Neon lights_107: -1075625628
+      All Neon lights_108: 741075240
+      All Neon lights_109: 189345106
+      All Neon lights_11: -1842615034
+      All Neon lights_110: -776062000
+      All Neon lights_111: -1701883456
+      All Neon lights_112: -521910076
+      All Neon lights_113: 1855794659
+      All Neon lights_114: -160166106
+      All Neon lights_115: 182137309
+      All Neon lights_116: 2042907627
+      All Neon lights_117: -1278795339
+      All Neon lights_118: -985347602
+      All Neon lights_119: -1831244537
+      All Neon lights_12: -1842020952
+      All Neon lights_120: -2045555445
+      All Neon lights_121: 430863205
+      All Neon lights_122: 590113338
+      All Neon lights_123: 870487248
+      All Neon lights_124: 652037048
+      All Neon lights_125: 2017755657
+      All Neon lights_126: 1394456963
+      All Neon lights_127: 319944175
+      All Neon lights_128: -37069019
+      All Neon lights_129: -2023781860
+      All Neon lights_13: 398599770
+      All Neon lights_130: 1055843094
+      All Neon lights_131: -1541392767
+      All Neon lights_132: -404734043
+      All Neon lights_133: 1492523686
+      All Neon lights_134: 71457786
+      All Neon lights_135: 203575195
+      All Neon lights_136: 1695031473
+      All Neon lights_137: -27732149
+      All Neon lights_138: -1399803739
+      All Neon lights_139: 454360935
+      All Neon lights_14: -1726421934
+      All Neon lights_140: -5593084
+      All Neon lights_141: -2109434290
+      All Neon lights_142: -256916988
+      All Neon lights_143: 1875816855
+      All Neon lights_144: 1904037775
+      All Neon lights_145: -1276775497
+      All Neon lights_146: 997088815
+      All Neon lights_147: -2101599419
+      All Neon lights_148: 961236843
+      All Neon lights_149: -1422595723
+      All Neon lights_15: -2007620182
+      All Neon lights_150: -1202734875
+      All Neon lights_151: 572134981
+      All Neon lights_152: -39495741
+      All Neon lights_153: -916467262
+      All Neon lights_154: 1855545773
+      All Neon lights_155: 149549924
+      All Neon lights_156: -957101038
+      All Neon lights_157: 1696360576
+      All Neon lights_158: -2010408945
+      All Neon lights_159: -197351125
+      All Neon lights_16: -1825819137
+      All Neon lights_160: -1318350204
+      All Neon lights_161: 1734130667
+      All Neon lights_162: -1130628792
+      All Neon lights_163: -2029230746
+      All Neon lights_164: 973510927
+      All Neon lights_165: -769276556
+      All Neon lights_166: 341162218
+      All Neon lights_167: 1845974946
+      All Neon lights_168: 627007911
+      All Neon lights_169: -1752534259
+      All Neon lights_17: 505327760
+      All Neon lights_170: -540822442
+      All Neon lights_171: -979701222
+      All Neon lights_172: -261282388
+      All Neon lights_173: 693808639
+      All Neon lights_174: -1687328137
+      All Neon lights_175: -1025521183
+      All Neon lights_176: -916080503
+      All Neon lights_177: -2133700140
+      All Neon lights_178: 1841302423
+      All Neon lights_179: 703552845
+      All Neon lights_18: 954512015
+      All Neon lights_180: 603171692
+      All Neon lights_181: 180909554
+      All Neon lights_182: 726569945
+      All Neon lights_183: -1258025882
+      All Neon lights_184: 2099370829
+      All Neon lights_185: 1455991052
+      All Neon lights_186: 732768777
+      All Neon lights_187: -1337059963
+      All Neon lights_188: 993685057
+      All Neon lights_189: -177484812
+      All Neon lights_19: -178995739
+      All Neon lights_190: 1659447358
+      All Neon lights_191: 4156663
+      All Neon lights_192: 1407285437
+      All Neon lights_193: 1005890915
+      All Neon lights_194: -761109613
+      All Neon lights_195: 879259657
+      All Neon lights_196: 1646009532
+      All Neon lights_197: -1300619266
+      All Neon lights_198: 115794073
+      All Neon lights_199: 1695806816
+      All Neon lights_2: -585195686
+      All Neon lights_20: 2128651937
+      All Neon lights_200: -82755713
+      All Neon lights_201: -2049872161
+      All Neon lights_202: -2013364580
+      All Neon lights_203: -211193804
+      All Neon lights_204: 1598343063
+      All Neon lights_205: -60717793
+      All Neon lights_206: -1550883030
+      All Neon lights_207: 1845529329
+      All Neon lights_208: 1060138363
+      All Neon lights_209: -1334990169
+      All Neon lights_21: -1176885470
+      All Neon lights_210: 1259450353
+      All Neon lights_211: -1847021655
+      All Neon lights_212: 363343112
+      All Neon lights_213: -1383761077
+      All Neon lights_214: 1494527347
+      All Neon lights_215: 1147517701
+      All Neon lights_216: 625827715
+      All Neon lights_217: -1936963762
+      All Neon lights_22: 1825024360
+      All Neon lights_23: 10638901
+      All Neon lights_24: 548661536
+      All Neon lights_25: -1778972622
+      All Neon lights_26: 1893056293
+      All Neon lights_27: 1492158823
+      All Neon lights_28: 809554170
+      All Neon lights_29: 1448357428
+      All Neon lights_3: -1964463343
+      All Neon lights_30: -462838799
+      All Neon lights_31: 1328884945
+      All Neon lights_32: 1845134087
+      All Neon lights_33: -425206382
+      All Neon lights_34: 464911255
+      All Neon lights_35: 1024444649
+      All Neon lights_36: 774905034
+      All Neon lights_37: -456478596
+      All Neon lights_38: -1747175165
+      All Neon lights_39: 2146635271
+      All Neon lights_4: -1840533809
+      All Neon lights_40: -1172344062
+      All Neon lights_41: -561911723
+      All Neon lights_42: 1072298119
+      All Neon lights_43: 107710249
+      All Neon lights_44: -1951926413
+      All Neon lights_45: -1777409949
+      All Neon lights_46: 674259352
+      All Neon lights_47: 107769978
+      All Neon lights_48: -1773793778
+      All Neon lights_49: -610902776
+      All Neon lights_5: 1341062947
+      All Neon lights_50: 1685658309
+      All Neon lights_51: -629178899
+      All Neon lights_52: 887456225
+      All Neon lights_53: 578179062
+      All Neon lights_54: 1429502930
+      All Neon lights_55: -748250851
+      All Neon lights_56: -2065803692
+      All Neon lights_57: 675266843
+      All Neon lights_58: -1961958559
+      All Neon lights_59: 985919971
+      All Neon lights_6: -2020382901
+      All Neon lights_60: 779683679
+      All Neon lights_61: 1926077726
+      All Neon lights_62: -879553261
+      All Neon lights_63: 1725892432
+      All Neon lights_64: 863409880
+      All Neon lights_65: 586041120
+      All Neon lights_66: 1651422867
+      All Neon lights_67: -1777004213
+      All Neon lights_68: -1837495797
+      All Neon lights_69: -1190061636
+      All Neon lights_7: 873730335
+      All Neon lights_70: 1755351602
+      All Neon lights_71: 928357304
+      All Neon lights_72: -1779729838
+      All Neon lights_73: 400218969
+      All Neon lights_74: -25544957
+      All Neon lights_75: -698546858
+      All Neon lights_76: 1435400083
+      All Neon lights_77: 281782414
+      All Neon lights_78: -684728106
+      All Neon lights_79: -162114999
+      All Neon lights_8: 48757481
+      All Neon lights_80: -1461364163
+      All Neon lights_81: 1776234357
+      All Neon lights_82: 120462371
+      All Neon lights_83: -1255485883
+      All Neon lights_84: -425336860
+      All Neon lights_85: 1549942377
+      All Neon lights_86: 1660749649
+      All Neon lights_87: 1764276584
+      All Neon lights_88: -1079677604
+      All Neon lights_89: -1537077297
+      All Neon lights_9: -1250748437
+      All Neon lights_90: 564813175
+      All Neon lights_91: -1440608760
+      All Neon lights_92: 987525018
+      All Neon lights_93: -484797979
+      All Neon lights_94: 295493769
+      All Neon lights_95: -1260366485
+      All Neon lights_96: -424764228
+      All Neon lights_97: 228199061
+      All Neon lights_98: -813375856
+      All Neon lights_99: 499955662
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

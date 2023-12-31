@@ -247,7 +247,7 @@ namespace Platformer.Mechanics
 
         private void OnMenuPerformed(InputAction.CallbackContext context)
         {
-            meta.ToggleMainMenu(!meta.mainMenu.isActiveAndEnabled);
+            //meta.ToggleMainMenu(!meta.mainMenu.isActiveAndEnabled);
         }
 
         private void PrintDebugControlConfiguration()
