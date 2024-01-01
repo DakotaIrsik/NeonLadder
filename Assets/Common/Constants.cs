@@ -10,7 +10,7 @@
 
         #region player
         public const float DefaultMaxSpeed = 4f;
-        public const float DefaultJumpTakeOffSpeed = 10f;
+        public const float DefaultJumpTakeOffSpeed = 13f;
         public const float DefaultCharacterScale = 1f;
         public const float DefaultMaxHealth = 3f;
         public const float DefaultMaxStamina = 100f;
@@ -31,7 +31,7 @@
         /// The JumpCutOffFactor is a multiplier used to reduce the upward velocity of the player's character when the jump button is released before reaching the maximum jump height. This factor allows for variable jump heights, providing a more dynamic and responsive jumping mechanic in the game. Here's a detailed explanation and some sample values:
         /// </summary>
         public const float JumpCutOffFactor = 0.5f;
-        public const float JumpDuration = 0.5f;
+        public const float JumpDuration = 1.0f;
         public const float JumpCooldown = 0.5f;
         public const float JumpStaminaCost = 2.0f;
         public const float WallJumpForce = 5.0f;

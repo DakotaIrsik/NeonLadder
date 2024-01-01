@@ -8,6 +8,9 @@ TagManager:
   - Melee
   - PowerUp
   - SceneChange
+  - TutorialRequirement
+  - Wall
+  - BossSpawn
   layers:
   - Default
   - TransparentFX

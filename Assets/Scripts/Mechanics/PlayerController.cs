@@ -76,6 +76,12 @@ namespace Platformer.Mechanics
                 }
                 SceneManager.LoadScene(newScene);
             }
+
+
+            if (collision.collider.tag == "BossSpawn")
+            {
+                
+            }
         }
         IEnumerator ResetColliderAfterSlide(CapsuleCollider2D collider)
         {
