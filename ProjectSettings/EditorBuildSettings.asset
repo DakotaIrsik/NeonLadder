@@ -8,5 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Francesca.unity
     guid: 895889cbc95d5e64d925443ede4d0527
+    path: Assets/Scenes/2DPlatformerTutorialScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b1e40208001811b438022357f0762b56, type: 2}
