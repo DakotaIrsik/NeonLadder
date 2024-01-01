@@ -3,17 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Melee
+  - PowerUp
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Level
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Foreground
+  - Background
+  - FarBackground
   - 
   - 
   - 
@@ -38,6 +41,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Foreground
+    uniqueID: 2167581559
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Level
+    uniqueID: 3266661735
+    locked: 0
+  - name: Background
+    uniqueID: 205742763
+    locked: 0
+  - name: FarBackground
+    uniqueID: 1453949677
     locked: 0
