@@ -61,7 +61,20 @@ namespace Platformer.Mechanics
             }
             if (collision.collider.tag == "SceneChange")
             {
-                SceneManager.LoadScene("2DPlatformerTutorialScene");
+                var currentScene = SceneManager.GetActiveScene().name;
+                var newScene = string.Empty;
+                switch (currentScene)
+                {
+                    case "2DPlatformerTutorialScene":
+                        newScene = "Francesca";
+                        break;
+                    case "Francesca":
+                        newScene = "2DPlatformerTutorialScene";
+                        break;
+                    default:
+                        break;
+                }
+                SceneManager.LoadScene(newScene);
             }
         }
         IEnumerator ResetColliderAfterSlide(CapsuleCollider2D collider)
