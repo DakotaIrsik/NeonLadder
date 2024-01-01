@@ -83,3 +83,7 @@ crashlytics-build.properties
 /Assets/Mod Assets/*
 *Mod Assets*
 /Assets/XR
+/Assets/Resources/PerformanceTestRunInfo.json
+/Assets/Resources/PerformanceTestRunInfo.json.meta
+/Assets/Resources/PerformanceTestRunSettings.json
+/Assets/Resources/PerformanceTestRunSettings.json.meta
