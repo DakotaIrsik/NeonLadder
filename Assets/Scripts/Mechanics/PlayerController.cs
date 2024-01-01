@@ -4,6 +4,7 @@ using Platformer.Model;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static Assets.Scripts.Mechanics.MechanicEnums;
 using static Platformer.Core.Simulation;
 
@@ -45,6 +46,7 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            //DontDestroyOnLoad(this);
         }
 
         public void OnCollisionEnter2D(Collision2D collision)
@@ -56,6 +58,29 @@ namespace Platformer.Mechanics
                 CapsuleCollider2D enemyCollider = collision.collider.GetComponent<CapsuleCollider2D>();
                 enemyCollider.isTrigger = true;
                 StartCoroutine(ResetColliderAfterSlide(enemyCollider));
+            }
+            if (collision.collider.tag == "SceneChange")
+            {
+                var currentScene = SceneManager.GetActiveScene().name;
+                var newScene = string.Empty;
+                switch (currentScene)
+                {
+                    case "2DPlatformerTutorialScene":
+                        newScene = "Francesca";
+                        break;
+                    case "Francesca":
+                        newScene = "2DPlatformerTutorialScene";
+                        break;
+                    default:
+                        break;
+                }
+                SceneManager.LoadScene(newScene);
+            }
+
+
+            if (collision.collider.tag == "BossSpawn")
+            {
+                
             }
         }
         IEnumerator ResetColliderAfterSlide(CapsuleCollider2D collider)
