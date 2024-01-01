@@ -4,6 +4,7 @@ using Platformer.Model;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static Assets.Scripts.Mechanics.MechanicEnums;
 using static Platformer.Core.Simulation;
 
@@ -45,6 +46,7 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            //DontDestroyOnLoad(this);
         }
 
         public void OnCollisionEnter2D(Collision2D collision)
@@ -56,6 +58,10 @@ namespace Platformer.Mechanics
                 CapsuleCollider2D enemyCollider = collision.collider.GetComponent<CapsuleCollider2D>();
                 enemyCollider.isTrigger = true;
                 StartCoroutine(ResetColliderAfterSlide(enemyCollider));
+            }
+            if (collision.collider.tag == "SceneChange")
+            {
+                SceneManager.LoadScene("2DPlatformerTutorialScene");
             }
         }
         IEnumerator ResetColliderAfterSlide(CapsuleCollider2D collider)

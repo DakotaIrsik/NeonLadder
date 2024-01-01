@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Melee
   - PowerUp
+  - SceneChange
   layers:
   - Default
   - TransparentFX
