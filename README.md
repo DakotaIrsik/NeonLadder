@@ -26,7 +26,7 @@ Launch Executable
 ### KeyBoard:
 - Arrow keys or WASD to Move
 - Space bar to Jump
-- F to wall-hang (allows for double jumping
+- F Melee attack
 - Shift to Sprint
 - Left Ctrl to roll / dash.
 
