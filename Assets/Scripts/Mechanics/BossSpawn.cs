@@ -3,10 +3,18 @@ using UnityEngine;
 public class BossSpawn : MonoBehaviour
 {
     public ParticleSystem rain;
-    // Start is called before the first frame update
+    private GameObject boss;
     void Start()
     {
         rain.Stop();
+
+        boss = GameObject.FindGameObjectWithTag("Boss");
+
+        //deactivate the boss initially as it should not be visible from the start
+        if (boss != null)
+        {
+            boss.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -20,6 +28,7 @@ public class BossSpawn : MonoBehaviour
         if (collision.name == "Player")
         {
             rain.Play();
+            boss.gameObject.SetActive(true);
         }
     }
 }
